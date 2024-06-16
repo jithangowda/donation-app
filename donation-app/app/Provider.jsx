@@ -3,9 +3,9 @@ import Header from './_component/Header'
 
 function Provider({children}) {
   return (
-    <div>
+    <div>     
         <Header/>
-        <div className='mt-20'>
+        <div className='mt-25'>
           {children}
         </div>
         
