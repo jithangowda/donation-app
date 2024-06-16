@@ -5,7 +5,7 @@ function Provider({children}) {
   return (
     <div>
         <Header/>
-        <div className='flex justify-center my-22'>
+        <div className='mt-20'>
           {children}
         </div>
         

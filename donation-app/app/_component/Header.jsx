@@ -14,7 +14,7 @@ function Header() {
   },[])
 
   return (
-    <div className='p-4 px-5 flex justify-between shadow-sm fixed top-0 w-full z-100 bg-white'>
+    <div className='p-4 px-5 flex justify-between shadow-sm fixed top-0 w-full z-50 bg-white'>
       <div className='flex gap-7 item-center'>
         <Image src={'/logo.svg'} width={150} height={150} alt='logo'/>
         <ul className='hidden md:flex gap-10 py-4'>
