@@ -34,7 +34,7 @@ function Header() {
       <div className='flex gap-2 py-1 items-center'>
         <Button className='flex gap-2'><Plus/>Post your listing</Button>
 
-        {isSignedIn ? <UserButton/> : <Button variant='outline'>Login</Button>}
+        {isSignedIn ? <UserButton/> : <Link href={'/sign-in'}><Button variant='outline'>Login</Button></Link>}
         
       </div>
     </div>
