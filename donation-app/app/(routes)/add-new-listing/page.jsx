@@ -1,4 +1,6 @@
+import GoogleAddressSearch from '@/app/_component/GoogleAddressSearch.jsx'
 import React from 'react'
+
 
 function AddNewListing() {
   return (
@@ -6,6 +8,7 @@ function AddNewListing() {
         <h2 className='font-bold text-2xl'>Add New Listing</h2>
         <div>
             <h2 className='text-gray-500'>Enter Address which you want to list</h2>
+            <GoogleAddressSearch/>
         </div>
     </div>
   )
