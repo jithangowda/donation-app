@@ -1,15 +1,9 @@
-import { Inter } from "next/font/google";
+import { Epilogue } from "next/font/google";
 import "./globals.css";
 import Provider from "./Provider";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ["latin"] });
+const epilogue = Epilogue({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={epilogue.className}>
           <Provider>{children}</Provider>
         </body>
       </html>
