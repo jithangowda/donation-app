@@ -38,7 +38,8 @@ function Header() {
             <div className="hidden md:flex items-center gap-4 transition-all">
                 <Link href={'/'} className="relative group  px-2 py-3 transition-all ">
                     <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black ">
-                        <span>Home</span>
+                        <span className={`'hover:text-primary font-medium text-sm cursor-pointer'
+                            ${pathname == '/' && 'text-primary'}`}>Home</span>
                         {/* <IoIosArrowDown className=" rotate-180  transition-all group-hover:rotate-0"/> */}
                     </p>
                 </Link>
@@ -96,7 +97,8 @@ function MobileNav({ closeSideMenu }) {
               <div className="flex flex-col gap-4 transition-all">
               <Link href={'/'} onClick={closeSideMenu} className="relative group  px-2 py-3 transition-all ">
                   <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black ">
-                      <span>Home</span>
+                      <span className={`'hover:text-primary font-medium text-sm cursor-pointer'
+                            ${pathname == '/' && 'text-primary'}`}>Home</span>
                       {/* <IoIosArrowDown className=" rotate-180  transition-all group-hover:rotate-0"/> */}
                   </p>
               </Link>
