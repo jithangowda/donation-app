@@ -124,7 +124,7 @@ function MobileNav({ closeSideMenu }) {
           <section className="flex flex-col items-center gap-8 mt-4 ">
 
               <Link href={'/add-new-listing'}>       
-                <Button className='flex rounded-xl gap-2 w-full'><PlusIcon className='h-5 w-5'/>Post your listing</Button>
+                <Button className='flex rounded-xl gap-2 w-full' onClick={closeSideMenu}><PlusIcon className='h-5 w-5'/>Post your listing</Button>
               </Link>  
 
               {isSignedIn ? <UserButton/> : 
