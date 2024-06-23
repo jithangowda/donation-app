@@ -33,7 +33,7 @@ function Header() {
     <div className="mx-auto flex top-0 z-10 w-full max-w-7xl justify-between px-4 py-4 text-sm ">
 
         <section ref={animationParent} className="flex items-center gap-8 ">  
-            <Image src={'/L4.svg'} alt='logo' width={100} height={100}/>
+            <Image src={'/logo.svg'} alt='logo' width={170} height={100}/>
             {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />}
             <div className="hidden md:flex items-center gap-4 transition-all">
                 <Link href={'/'} className="relative group  px-2 py-3 transition-all ">
