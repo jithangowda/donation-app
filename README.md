@@ -23,3 +23,7 @@ NEXT_PUBLIC_SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdX
 #get key from google maps API
 NEXT_PUBLIC_GOOGLE_PLACE_API_KEY=AIzaSyAljJFK7gqiSSzR31Gb3vOZjRLPkojTxC8
 ```
+Run dev
+```
+npm run dev
+```
