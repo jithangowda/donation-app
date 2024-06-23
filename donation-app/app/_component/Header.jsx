@@ -30,10 +30,10 @@ function Header() {
   }
   
   return (
-    <div className="mx-auto flex  w-full max-w-7xl justify-between px-4 py-5 text-sm z-10">
+    <div className="mx-auto flex top-0 z-10 w-full max-w-7xl justify-between px-4 py-4 text-sm ">
 
-        <section ref={animationParent} className="flex items-center gap-10 ">  
-            <Image src={'/logo.svg'} alt='logo' width={170} height={170}/>
+        <section ref={animationParent} className="flex items-center gap-8 ">  
+            <Image src={'/L4.svg'} alt='logo' width={100} height={100}/>
             {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />}
             <div className="hidden md:flex items-center gap-4 transition-all">
                 <Link href={'/'} className="relative group  px-2 py-3 transition-all ">
@@ -61,8 +61,11 @@ function Header() {
         </section>
 
         <section className=" hidden md:flex items-center gap-8 ">
-            <Button className='flex rounded-xl gap-2'><PlusIcon className='h-5 w-5'/>Post your listing</Button>
             
+            <Link href={'/add-new-listing'}>
+              <Button className='flex rounded-xl gap-2'><PlusIcon className='h-5 w-5'/>Post your listing</Button>
+            </Link>
+
             {isSignedIn ? <UserButton/> : <Link href={'/sign-in'}>
                 <Button variant="outline" className="rounded-full border-gray bg-gray-50">Login</Button>
             </Link>}
@@ -119,11 +122,15 @@ function MobileNav({ closeSideMenu }) {
           </div>
 
           <section className="flex flex-col items-center gap-8 mt-4 ">
-              <Button className='flex rounded-xl gap-2 w-full'><PlusIcon className='h-5 w-5'/>Post your listing</Button>
 
-              {isSignedIn ? <UserButton/> : <Link href={'/sign-in'}>
+              <Link href={'/add-new-listing'}>       
+                <Button className='flex rounded-xl gap-2 w-full'><PlusIcon className='h-5 w-5'/>Post your listing</Button>
+              </Link>  
+
+              {isSignedIn ? <UserButton/> : 
+              <Link href={'/sign-in'}>
                 <Button variant="outline" className="rounded-full border-gray bg-gray-50" onClick={closeSideMenu} >Login</Button>
-            </Link>}
+              </Link>}
           
           </section>
 
