@@ -6,7 +6,7 @@ function Provider({children}) {
   return (
     <div>     
         <Header/>
-        <div className='m-0'> 
+        <div className='overflow-hidden'> 
           {children}
         </div>
         

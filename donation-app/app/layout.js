@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={epilogue.className}>
+        <body className={`${epilogue.className} no-scrollbar`}>
           <Provider>{children}</Provider>
         </body>
       </html>
