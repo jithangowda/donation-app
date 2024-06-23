@@ -30,12 +30,24 @@ function AddNewListing() {
     if(data) {
       setLoader(false)
       console.log("New data added",data);
-      toast("New Address added for listing")
+      toast.success("New Address added for listing",{
+        duration: 2000,
+        style: {
+          background: '#90D26D',
+        }
+        
+      })
     }
     if(error) {
       setLoader(false)
       console.log(error);
-      toast("Error Occured")
+      toast.error("Error Occured",{
+        duration: 2000,
+        style: {
+          background: '#E57373',
+        }
+        
+      })
     }
         
   }
