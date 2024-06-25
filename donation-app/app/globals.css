@@ -7,6 +7,9 @@
     display: none; /* Safari and Chrome */
   }
 
+
+
+  /* dynamic routing edit-listing page calender fix*/
   .custom-calendar-container {
     width: 520px; /* Default width */
     height: 285px; /* Default height */

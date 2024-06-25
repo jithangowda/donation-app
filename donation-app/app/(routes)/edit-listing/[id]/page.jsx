@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -25,9 +25,45 @@ import {
 import { Input } from "@/components/ui/input.jsx";
 import { Textarea } from "@/components/ui/textarea.jsx";
 import { Formik } from "formik";
+import { usePathname } from "next/navigation.js";
+import { supabase } from "@/utils/supabase/client.js";
 
 function EditListing() {
   const [date, setDate] = useState();
+
+  // returns the id of the dynamic routing page
+  const params = usePathname();
+  useEffect(() => {
+    console.log(params.split("/")[2]);
+  }, []);
+
+  const onSubmitHandler = async (formValue) => {
+    const { data, error } = await supabase
+      .from("listing")
+      .update(formValue)
+      .eq("id", params.split("/")[2])
+      .select();
+
+    if (data) {
+      console.log(data);
+      toast.success("Listing Updated and Published", {
+        duration: 2000,
+        style: {
+          background: "#90D26D",
+        },
+      });
+    }
+    if (error) {
+      console.log(error);
+      toast.error("Error Occured", {
+        duration: 2000,
+        style: {
+          background: "#E57373",
+        },
+      });
+    }
+  };
+
   return (
     <div className="px-10 md:px-36 my-10">
       <h2 className="font-bold text-lg text-center">
