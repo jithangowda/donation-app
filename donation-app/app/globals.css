@@ -7,3 +7,30 @@
     display: none; /* Safari and Chrome */
   }
 
+  .custom-calendar-container {
+    width: 520px; /* Default width */
+    height: 285px; /* Default height */
+    padding: 10px; /* Default padding */
+    background-color: white; /* Default background color */
+    border: 1px solid #ccc; /* Default border */
+    border-radius: 4px; /* Default border radius */
+  }
+  
+  .custom-calendar {
+    transform: scale(0.90); /* Default scale */
+    transform-origin: top left;
+    width: 100%; /* Ensure calendar fills its container */
+    height: 100%; /* Ensure calendar fills its container */
+  }
+  
+  @media (max-width: 640px) {
+    .custom-calendar-container {
+      width: 250px; /* Adjusted width for small screens */
+      height: 515px; /* Adjusted height for small screens */
+      padding: 8px; /* Adjusted padding for small screens */
+    }
+  
+    .custom-calendar {
+      transform: scale(0.85); /* Adjusted scale for small screens */
+    }
+  }
