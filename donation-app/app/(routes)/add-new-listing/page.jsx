@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button.jsx";
 import { supabase } from "@/utils/supabase/client.js";
 import { useUser } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation.js";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -12,6 +13,7 @@ function AddNewListing() {
   const [coordinates, setCoordinates] = useState();
   const { user } = useUser();
   const [loader, setLoader] = useState(false);
+  const router = useRouter();
 
   const nextHandler = async () => {
     setLoader(true);
@@ -36,6 +38,7 @@ function AddNewListing() {
           background: "#90D26D",
         },
       });
+      router.replace("/edit-listing/" + data[0].id);
     }
     if (error) {
       setLoader(false);

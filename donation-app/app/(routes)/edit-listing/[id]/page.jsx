@@ -27,22 +27,46 @@ import { Textarea } from "@/components/ui/textarea.jsx";
 import { Formik } from "formik";
 import { usePathname } from "next/navigation.js";
 import { supabase } from "@/utils/supabase/client.js";
+import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation.js";
+import { Loader } from "lucide-react";
 
-function EditListing() {
+function EditListing({ params }) {
   const [date, setDate] = useState();
+  const { user } = useUser();
+  const router = useRouter();
+  const [listing, setListing] = useState([]);
 
   // returns the id of the dynamic routing page
-  const params = usePathname();
   useEffect(() => {
-    console.log(params.split("/")[2]);
-  }, []);
+    // console.log(params.split("/")[2]);
+    user && verifyUserRecord();
+  }, [user]);
+
+  //verify user to make sure user can access its own record
+  const verifyUserRecord = async () => {
+    const { data, error } = await supabase
+      .from("listing")
+      .select("*")
+      .eq("created_by", user?.primaryEmailAddress.emailAddress)
+      .eq("id", params.id);
+
+    if (data?.length <= 0) {
+      router.replace("/");
+    }
+  };
 
   const onSubmitHandler = async (formValue) => {
     const { data, error } = await supabase
       .from("listing")
       .update(formValue)
-      .eq("id", params.split("/")[2])
+      .eq("id", params.id)
       .select();
+
+    if (data) {
+      setListing(data[0]);
+    }
 
     if (data) {
       console.log(data);
@@ -52,13 +76,12 @@ function EditListing() {
           background: "#90D26D",
         },
       });
-    }
-    if (error) {
-      console.log(error);
-      toast.error("Error Occured", {
+    } else if (error) {
+      console.error("Error updating listing:", error.message);
+      toast.error("Failed to update listing", {
         duration: 2000,
         style: {
-          background: "#E57373",
+          background: "#E3342F",
         },
       });
     }
@@ -82,6 +105,7 @@ function EditListing() {
         }}
         onSubmit={(values) => {
           console.log(values);
+          onSubmitHandler(values);
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
@@ -132,6 +156,7 @@ function EditListing() {
                       Donation Drive Name
                     </h2>
                     <Input
+                      defaultValue={listing?.driveName}
                       placeholder="Ex. Donation Drive 1"
                       name="driveName"
                       className="rounded-xl border-gray-300"

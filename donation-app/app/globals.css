@@ -29,7 +29,7 @@
   @media (max-width: 640px) {
     .custom-calendar-container {
       width: 250px; /* Adjusted width for small screens */
-      height: 515px; /* Adjusted height for small screens */
+      height: 550px; /* Adjusted height for small screens */
       padding: 8px; /* Adjusted padding for small screens */
     }
   
