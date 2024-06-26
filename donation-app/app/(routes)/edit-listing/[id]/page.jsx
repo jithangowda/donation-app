@@ -30,13 +30,15 @@ import { supabase } from "@/utils/supabase/client.js";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation.js";
-import { Loader } from "lucide-react";
+import { Loader, ServerIcon } from "lucide-react";
+import FileUpload from "../_component/FileUpload.jsx";
 
 function EditListing({ params }) {
   const [date, setDate] = useState();
   const { user } = useUser();
   const router = useRouter();
   const [listing, setListing] = useState([]);
+  const [images, setImages] = useState([]);
 
   // returns the id of the dynamic routing page
   useEffect(() => {
@@ -51,6 +53,17 @@ function EditListing({ params }) {
       .select("*")
       .eq("created_by", user?.primaryEmailAddress.emailAddress)
       .eq("id", params.id);
+    if (data) {
+      setListing(data[0]);
+
+      // Set initial date state if startDate and endDate exist
+      if (data[0]?.startDate && data[0]?.endDate) {
+        setDate({
+          from: new Date(data[0].startDate),
+          to: new Date(data[0].endDate),
+        });
+      }
+    }
 
     if (data?.length <= 0) {
       router.replace("/");
@@ -63,13 +76,7 @@ function EditListing({ params }) {
       .update(formValue)
       .eq("id", params.id)
       .select();
-
     if (data) {
-      setListing(data[0]);
-    }
-
-    if (data) {
-      console.log(data);
       toast.success("Listing Updated and Published", {
         duration: 2000,
         style: {
@@ -84,6 +91,29 @@ function EditListing({ params }) {
           background: "#E3342F",
         },
       });
+    }
+
+    //add images to supabase
+    for (const image of images) {
+      const file = image;
+      // const fileName = file.name;
+      const fileName = Date.now().toString();
+      const fileExtension = fileName.split(".").pop();
+
+      //supabase storage
+      const { data, error } = await supabase.storage
+        .from("listingImages")
+        .upload(`${fileName}`, file, {
+          contentType: `image/${fileExtension}`,
+          upsert: false,
+        });
+
+      if (error) {
+        console.error("Error updating listing:", error.message);
+        toast.error("Error while Uploading Images");
+      } else {
+        console.log("data", data);
+      }
     }
   };
 
@@ -102,7 +132,17 @@ function EditListing({ params }) {
           startDate: "",
           endDate: "",
           description: "",
+          // donationType: listing.donationType || "",
+          // organizerType: listing.organizerType || "",
+          // driveName: listing.driveName || "",
+          // donationNeeds: listing.donationNeeds || "",
+          // startDate: listing.startDate || "",
+          // endDate: listing.endDate || "",
+          // description: listing.description || "",
+          profileImage: user?.imageUrl,
+          userName: user?.fullName,
         }}
+        // enableReinitialize
         onSubmit={(values) => {
           console.log(values);
           onSubmitHandler(values);
@@ -111,15 +151,18 @@ function EditListing({ params }) {
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <div className="p-8 rounded-xl border grid gap-7 mt-6  shadow-md  ">
+              <div className="p-8 rounded-xl border grid gap-7 mt-6 shadow-md  ">
                 {/* row 1 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2  xl:grid-cols-3 gap-5">
                   {/* Offer or Request */}
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-sm text-slate-500">
+                    <h2 className="text-sm text-gray-500">
                       Do you want to Offer or Request Donation?
                     </h2>
                     <RadioGroup
+                      // value={values.donationType}
+                      // onValueChange={(v) => setFieldValue("donationType", v)}
+                      // defaultValue={listing?.donationType}
                       onValueChange={(v) => (values.donationType = v)}
                     >
                       <div className="flex items-center space-x-2">
@@ -132,14 +175,20 @@ function EditListing({ params }) {
                       </div>
                     </RadioGroup>
                   </div>
+
                   {/* Select Donation Organizer */}
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-sm text-slate-500">
+                    <h2 className="text-sm text-gray-500">
                       Donation Drive Organizer type?
                     </h2>
                     <Select onValueChange={(e) => (values.organizerType = e)}>
                       <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
-                        <SelectValue placeholder="Select Organizer type" />
+                        <SelectValue
+                          placeholder={"Select Organizer type"}
+                          // listing?.organizerType
+                          // ? listing?.organizerType
+                          // :
+                        />
                       </SelectTrigger>
                       <SelectContent className="bg-white">
                         <SelectItem value="Individual">Individual</SelectItem>
@@ -150,14 +199,18 @@ function EditListing({ params }) {
                       </SelectContent>
                     </Select>
                   </div>
+
                   {/* Donation Drive Name */}
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-sm text-slate-500">
+                    <h2 className="text-sm text-gray-500">
                       Donation Drive Name
                     </h2>
                     <Input
                       defaultValue={listing?.driveName}
-                      placeholder="Ex. Donation Drive 1"
+                      placeholder={"Ex. Donation Drive 1"}
+                      // listing?.driveName
+                      //     ? listing?.driveName
+                      //     :
                       name="driveName"
                       className="rounded-xl border-gray-300"
                       onChange={handleChange}
@@ -170,10 +223,15 @@ function EditListing({ params }) {
                   <div className="grid  grid-cols-1 md:grid-cols-2 sm:grid-cols-2  xl:grid-cols-3 gap-5">
                     {/* Select Donation Needs */}
                     <div className="flex flex-col gap-2">
-                      <h2 className="text-sm text-slate-500">Donation Needs</h2>
+                      <h2 className="text-sm text-gray-500">Donation Needs</h2>
                       <Select onValueChange={(e) => (values.donationNeeds = e)}>
                         <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
-                          <SelectValue placeholder="Select Donation Needs" />
+                          <SelectValue
+                            placeholder={"Select Donation Needs"}
+                            // listing?.donationNeeds
+                            //     ? listing?.donationNeeds
+                            //     :
+                          />
                         </SelectTrigger>
                         <SelectContent className="bg-white">
                           <SelectItem value="Food">Food</SelectItem>
@@ -186,9 +244,10 @@ function EditListing({ params }) {
                         </SelectContent>
                       </Select>
                     </div>
+
                     {/* Pick Date */}
                     <div className="flex flex-col gap-2">
-                      <h2 className="text-sm text-slate-500">Pick a Date</h2>
+                      <h2 className="text-sm text-gray-500">Pick a Date</h2>
                       <Popover>
                         <PopoverTrigger asChild>
                           <Button
@@ -253,14 +312,25 @@ function EditListing({ params }) {
                   {/* description */}
                   <div className="grid grid-cols-1 gap-10">
                     <div className="flex flex-col gap-2">
-                      <h2 className="text-sm text-slate-500">Description</h2>
+                      <h2 className="text-sm text-gray-500">Description</h2>
                       <Textarea
+                        // defaultValue={listing?.description}
                         placeholder="Enter Description"
                         name="description"
                         className="rounded-xl border-gray-300"
                         onChange={handleChange}
                       />
                     </div>
+                  </div>
+                </div>
+
+                {/* FileUpload */}
+                <div className="grid grid-cols-1 gap-10">
+                  <div className="flex flex-col gap-2">
+                    <h2 className="text-sm text-gray-500">
+                      Upload Location Images
+                    </h2>
+                    <FileUpload setImages={(value) => setImages(value)} />
                   </div>
                 </div>
 
