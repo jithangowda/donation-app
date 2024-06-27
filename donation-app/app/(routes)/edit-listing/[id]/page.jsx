@@ -245,7 +245,8 @@ function EditListing({ params }) {
                       </Select>
                     </div>
 
-                    {/* Pick Date */}
+                    {/* 
+                    // asddasd */}
                     <div className="flex flex-col gap-2">
                       <h2 className="text-sm text-gray-500">Pick a Date</h2>
                       <Popover>
@@ -258,7 +259,8 @@ function EditListing({ params }) {
                               !date && "text-muted-foreground"
                             )}
                           >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            <C
+                            // asddasdon className="mr-2 h-4 w-4" />
                             {date?.from ? (
                               date.to ? (
                                 <>
@@ -315,6 +317,7 @@ function EditListing({ params }) {
                       <h2 className="text-sm text-gray-500">Description</h2>
                       <Textarea
                         // defaultValue={listing?.description}
+                        // asddasd
                         placeholder="Enter Description"
                         name="description"
                         className="rounded-xl border-gray-300"
