@@ -31,7 +31,7 @@ function Header() {
 
   return (
     <div className="mx-auto flex top-0 z-10 w-full max-w-7xl justify-between px-4 py-4 text-sm ">
-      <section ref={animationParent} className="flex items-center gap-8 ">
+      <section ref={animationParent} className="flex items-center gap-8">
         <Image src={"/logo.svg"} alt="logo" width={170} height={100} />
         {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />}
         <div className="hidden md:flex items-center gap-4 transition-all">

@@ -52,7 +52,7 @@ function FileUpload({ setImages }) {
           />
         </label>
       </div>
-      <div className="gap-3 mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10">
+      <div className="gap-3 mt-3  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10">
         {imagePreview.map((image, index) => (
           <div key={index}>
             <Image
@@ -60,7 +60,7 @@ function FileUpload({ setImages }) {
               width={100}
               height={100}
               alt={index}
-              className="rounded-xl object-cover h-[100px] w-[100px]"
+              className="rounded-xl object-cover h-[100px] w-[100px] border-2 broder-black"
             />
           </div>
         ))}
