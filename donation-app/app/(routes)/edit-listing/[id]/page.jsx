@@ -32,13 +32,27 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation.js";
 import { Loader, ServerIcon } from "lucide-react";
 import FileUpload from "../_component/FileUpload.jsx";
+import Loading from "@/app/_component/Loading.jsx";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 function EditListing({ params }) {
   const [date, setDate] = useState();
   const { user } = useUser();
   const router = useRouter();
-  const [listing, setListing] = useState([]);
+  const [listing, setListing] = useState(null);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // returns the id of the dynamic routing page
   useEffect(() => {
@@ -50,10 +64,12 @@ function EditListing({ params }) {
   const verifyUserRecord = async () => {
     const { data, error } = await supabase
       .from("listing")
-      .select("*")
+      .select("*,listingImages(listing_id,url)")
       .eq("created_by", user?.primaryEmailAddress.emailAddress)
       .eq("id", params.id);
+
     if (data) {
+      console.log(data);
       setListing(data[0]);
 
       // Set initial date state if startDate and endDate exist
@@ -71,6 +87,7 @@ function EditListing({ params }) {
   };
 
   const onSubmitHandler = async (formValue) => {
+    setLoading(true);
     const { data, error } = await supabase
       .from("listing")
       .update(formValue)
@@ -91,6 +108,8 @@ function EditListing({ params }) {
           background: "#E3342F",
         },
       });
+      setLoading(false);
+      return;
     }
 
     //add images to supabase
@@ -111,11 +130,34 @@ function EditListing({ params }) {
       if (error) {
         console.error("Error updating listing:", error.message);
         toast.error("Error while Uploading Images");
+        setLoading(false);
       } else {
-        console.log("data", data);
+        //IMAGE-URL
+        const imageURL = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
+
+        //add image-url to listingImages table in supabase
+        const { data, error } = await supabase
+          .from("listingImages")
+          .insert([{ url: imageURL, listing_id: params?.id }])
+          .select();
+
+        if (error) {
+          setLoading(false);
+        }
       }
     }
+    setLoading(false);
   };
+
+  // Display a loading message or spinner while the listing is being fetched
+  if (listing === null) {
+    return <Loading />;
+  }
+
+  // Display an error message if no listing was found
+  if (!listing) {
+    return <div>No listing found with the specified ID.</div>;
+  }
 
   return (
     <div className="px-10 md:px-36 my-10">
@@ -125,24 +167,24 @@ function EditListing({ params }) {
 
       <Formik
         initialValues={{
-          donationType: "",
-          organizerType: "",
-          driveName: "",
-          donationNeeds: "",
-          startDate: "",
-          endDate: "",
-          description: "",
-          // donationType: listing.donationType || "",
-          // organizerType: listing.organizerType || "",
-          // driveName: listing.driveName || "",
-          // donationNeeds: listing.donationNeeds || "",
-          // startDate: listing.startDate || "",
-          // endDate: listing.endDate || "",
-          // description: listing.description || "",
+          // donationType: "",
+          // organizerType: "",
+          // driveName: "",
+          // donationNeeds: "",
+          // startDate: "",
+          // endDate: "",
+          // description: "",
+          donationType: listing.donationType || "",
+          organizerType: listing.organizerType || "",
+          driveName: listing.driveName || "",
+          donationNeeds: listing.donationNeeds || "",
+          startDate: listing.startDate || "",
+          endDate: listing.endDate || "",
+          description: listing.description || "",
           profileImage: user?.imageUrl,
           userName: user?.fullName,
         }}
-        // enableReinitialize
+        enableReinitialize
         onSubmit={(values) => {
           console.log(values);
           onSubmitHandler(values);
@@ -160,10 +202,10 @@ function EditListing({ params }) {
                       Do you want to Offer or Request Donation?
                     </h2>
                     <RadioGroup
-                      // value={values.donationType}
-                      // onValueChange={(v) => setFieldValue("donationType", v)}
+                      value={values.donationType}
+                      onValueChange={(v) => setFieldValue("donationType", v)}
                       // defaultValue={listing?.donationType}
-                      onValueChange={(v) => (values.donationType = v)}
+                      // onValueChange={(v) => (values.donationType = v)}
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="Offer" id="Offer" />
@@ -181,13 +223,18 @@ function EditListing({ params }) {
                     <h2 className="text-sm text-gray-500">
                       Donation Drive Organizer type?
                     </h2>
-                    <Select onValueChange={(e) => (values.organizerType = e)}>
+                    <Select
+                      value={values.organizerType}
+                      onValueChange={(e) => (values.organizerType = e)}
+                    >
                       <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
                         <SelectValue
-                          placeholder={"Select Organizer type"}
-                          // listing?.organizerType
-                          // ? listing?.organizerType
-                          // :
+                        // placeholder="Select Organizer type"
+                        // placeholder={
+                        //   listing?.organizerType
+                        //     ? listing?.organizerType
+                        //     : "Select Organizer type"
+                        // }
                         />
                       </SelectTrigger>
                       <SelectContent className="bg-white">
@@ -206,11 +253,9 @@ function EditListing({ params }) {
                       Donation Drive Name
                     </h2>
                     <Input
-                      defaultValue={listing?.driveName}
+                      // defaultValue={listing?.driveName}
+                      value={values.driveName}
                       placeholder={"Ex. Donation Drive 1"}
-                      // listing?.driveName
-                      //     ? listing?.driveName
-                      //     :
                       name="driveName"
                       className="rounded-xl border-gray-300"
                       onChange={handleChange}
@@ -224,13 +269,18 @@ function EditListing({ params }) {
                     {/* Select Donation Needs */}
                     <div className="flex flex-col gap-2">
                       <h2 className="text-sm text-gray-500">Donation Needs</h2>
-                      <Select onValueChange={(e) => (values.donationNeeds = e)}>
+                      <Select
+                        value={values.donationNeeds}
+                        onValueChange={(e) => (values.donationNeeds = e)}
+                      >
                         <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
                           <SelectValue
-                            placeholder={"Select Donation Needs"}
-                            // listing?.donationNeeds
+                            placeholder="Select Donation Needs"
+                            // placeholder={
+                            //   listing?.donationNeeds
                             //     ? listing?.donationNeeds
-                            //     :
+                            //     : "Select Donation Needs"
+                            // }
                           />
                         </SelectTrigger>
                         <SelectContent className="bg-white">
@@ -315,6 +365,7 @@ function EditListing({ params }) {
                       <h2 className="text-sm text-gray-500">Description</h2>
                       <Textarea
                         // defaultValue={listing?.description}
+                        value={values.description}
                         placeholder="Enter Description"
                         name="description"
                         className="rounded-xl border-gray-300"
@@ -330,7 +381,10 @@ function EditListing({ params }) {
                     <h2 className="text-sm text-gray-500">
                       Upload Location Images
                     </h2>
-                    <FileUpload setImages={(value) => setImages(value)} />
+                    <FileUpload
+                      setImages={(value) => setImages(value)}
+                      imageList={listing.listingImages}
+                    />
                   </div>
                 </div>
 
@@ -338,16 +392,42 @@ function EditListing({ params }) {
                 <div className="flex gap-7 justify-end">
                   {/* save button */}
                   <Button
-                    variant="outline"
+                    disabled={loading}
                     className="text-black font-semibold border-primary border-2 rounded-xl bg-green-50"
                   >
-                    Save
+                    {loading ? <Loader className="animate-spin" /> : "Save"}
                   </Button>
 
                   {/* save and publish */}
-                  <Button className=" font-semibold rounded-xl">
-                    Save and Publish
+                  <Button
+                    disabled={loading}
+                    className=" font-semibold rounded-xl"
+                  >
+                    {loading ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      "Save and Publish"
+                    )}
                   </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger>Open</AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete your account and remove your data from our
+                          servers.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction>Continue</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </div>
             </div>
