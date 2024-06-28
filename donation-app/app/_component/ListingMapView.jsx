@@ -17,7 +17,8 @@ function ListingMapView() {
         `*,listingImages(
         url,listing_id)`
       )
-      .eq("active", true);
+      .eq("active", true)
+      .order("id", { ascending: false });
 
     if (data) {
       console.log(data);
