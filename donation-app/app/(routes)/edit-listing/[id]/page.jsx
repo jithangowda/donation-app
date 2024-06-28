@@ -94,7 +94,7 @@ function EditListing({ params }) {
       .eq("id", params.id)
       .select();
     if (data) {
-      toast.success("Listing Updated and Published", {
+      toast.success("Listing Updated Successfully", {
         duration: 2000,
         style: {
           background: "#90D26D",
@@ -143,10 +143,51 @@ function EditListing({ params }) {
 
         if (error) {
           setLoading(false);
+          return;
         }
       }
     }
     setLoading(false);
+  };
+
+  //alet-dialog publish function
+  const publishBtnHandler = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("listing")
+        .update({ active: true })
+        .eq("id", params?.id)
+        .select();
+
+      if (error) {
+        console.error("Error publishing listing:", error.message);
+        toast.error("Failed to publish listing", {
+          duration: 2000,
+          style: {
+            background: "#E3342F",
+          },
+        });
+      } else {
+        console.log("Listing published Successfully", data);
+        toast.success("Listing Published Successfully", {
+          duration: 2000,
+          style: {
+            background: "#90D26D",
+          },
+        });
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast.error("Failed to publish listing due to unexpected error", {
+        duration: 2000,
+        style: {
+          background: "#E3342F",
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Display a loading message or spinner while the listing is being fetched
@@ -399,32 +440,45 @@ function EditListing({ params }) {
                   </Button>
 
                   {/* save and publish */}
-                  <Button
-                    disabled={loading}
-                    className=" font-semibold rounded-xl"
-                  >
-                    {loading ? (
-                      <Loader className="animate-spin" />
-                    ) : (
-                      "Save and Publish"
-                    )}
-                  </Button>
+
                   <AlertDialog>
-                    <AlertDialogTrigger>Open</AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        type="button"
+                        disabled={loading}
+                        className=" font-semibold rounded-xl"
+                      >
+                        {loading ? (
+                          <Loader className="animate-spin" />
+                        ) : (
+                          "Save and Publish"
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-white">
                       <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          Are you absolutely sure?
-                        </AlertDialogTitle>
+                        <AlertDialogTitle>Ready to Publish?</AlertDialogTitle>
                         <AlertDialogDescription>
-                          This action cannot be undone. This will permanently
-                          delete your account and remove your data from our
-                          servers.
+                          Do you really want to publish the listing?
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>Continue</AlertDialogAction>
+                        <AlertDialogCancel className="rounded-xl">
+                          Cancel
+                        </AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={async () => {
+                            await handleSubmit();
+                            publishBtnHandler();
+                          }}
+                          className="rounded-xl"
+                        >
+                          {loading ? (
+                            <Loader className="animate-spin" />
+                          ) : (
+                            "Publish"
+                          )}
+                        </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>

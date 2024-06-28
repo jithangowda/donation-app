@@ -32,7 +32,9 @@ function Header() {
   return (
     <div className="mx-auto flex top-0 z-10 w-full max-w-7xl justify-between px-4 py-4 text-sm ">
       <section ref={animationParent} className="flex items-center gap-8">
-        <Image src={"/logo.svg"} alt="logo" width={170} height={100} />
+        <Link href={"/"}>
+          <Image src={"/logo.svg"} alt="logo" width={170} height={100} />
+        </Link>
         {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />}
         <div className="hidden md:flex items-center gap-4 transition-all">
           <Link
@@ -159,13 +161,19 @@ function MobileNav({ closeSideMenu }) {
           </Link>
         </div>
 
-        <section className="flex flex-col items-center gap-8 mt-4 w-full">
-          <Link href={"/add-new-listing"}>
-            <Button className="flex rounded-xl gap-2 " onClick={closeSideMenu}>
-              <PlusIcon className="h-5 w-5" />
-              Post your listing
-            </Button>
-          </Link>
+        <section className="flex flex-col items-center gap-8 mt-4">
+          <div className="w-full">
+            <Link href={"/add-new-listing"}>
+              <Button
+                className="flex rounded-xl gap-2"
+                style={{ width: "100%" }}
+                onClick={closeSideMenu}
+              >
+                <PlusIcon className="h-5 w-5" />
+                Post your listing
+              </Button>
+            </Link>
+          </div>
 
           {isSignedIn ? (
             <UserButton />
