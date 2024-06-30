@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"; // Imports for custom Select component
 import {
   Building,
   ChevronsDown,
@@ -18,18 +18,18 @@ import {
   Users,
   UtensilsCrossed,
   Wallet,
-} from "lucide-react";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
+} from "lucide-react"; // Icon imports from Lucide for visual representation
+import { CalendarIcon } from "@radix-ui/react-icons"; // Icon import from Radix for calendar
+import { format } from "date-fns"; // Date formatting utility
+import { Calendar } from "@/components/ui/calendar"; // Calendar component import
+import { cn } from "@/lib/utils"; // Utility function import for class names
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { useSearchParams } from "next/navigation.js";
-import { Button } from "@/components/ui/button.jsx";
+} from "@/components/ui/popover"; // Imports for Popover component
+import { useSearchParams } from "next/navigation.js"; // Navigation utility for Next.js
+import { Button } from "@/components/ui/button.jsx"; // Button component import
 
 function FilterSection({
   setFilterDonationType,
@@ -38,16 +38,20 @@ function FilterSection({
   setFilterDate,
   resetFilters,
 }) {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(); // State for selected date in the calendar
+
+  // Handler for when a date is selected in the calendar
   const handleDateSelect = (selectedDate) => {
     setDate(selectedDate);
 
+    // Format the selected date for filter application
     const formattedDate = selectedDate
       ? format(selectedDate, "yyyy-MM-dd")
       : null;
-    setFilterDate(formattedDate);
+    setFilterDate(formattedDate); // Apply the selected date filter
   };
 
+  // Handler to clear all applied filters
   const handleClearFilters = () => {
     setDate(null); // Clear selected date
     setFilterDonationType(null); // Clear donation type filter
@@ -56,9 +60,10 @@ function FilterSection({
     setFilterDate(null); // Clear date filter
     resetFilters(); // Trigger function to reset additional filters in parent component
   };
+
   return (
     <div className="px-3 mb-4 md:gap-2 md:flex flex gap-2">
-      {/* donation type (offer/request) */}
+      {/* Donation type filter */}
       <Select onValueChange={setFilterDonationType}>
         <SelectTrigger className="w-[130px] rounded-xl border-gray-300">
           <SelectValue placeholder="Type" />
@@ -79,7 +84,7 @@ function FilterSection({
         </SelectContent>
       </Select>
 
-      {/* organizer type (Individual/Small Group/Registered Organization) */}
+      {/* Organizer type filter */}
       <Select onValueChange={setFilterOrganizerType}>
         <SelectTrigger className="w-[250px] rounded-xl border-gray-300">
           <SelectValue placeholder="Donation Organizer" />
@@ -106,7 +111,7 @@ function FilterSection({
         </SelectContent>
       </Select>
 
-      {/* donation needs (Food/Clothes/Stationary/Financial/Mixed Donation) */}
+      {/* Donation needs filter */}
       <Select onValueChange={setFilterDonationNeeds}>
         <SelectTrigger className="w-[190px] rounded-xl border-gray-300">
           <SelectValue placeholder="Donation Needs" />
@@ -145,7 +150,7 @@ function FilterSection({
         </SelectContent>
       </Select>
 
-      {/* select date */}
+      {/* Calendar popover for selecting a date */}
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -169,7 +174,7 @@ function FilterSection({
         </PopoverContent>
       </Popover>
 
-      {/* clear button */}
+      {/* Clear filters button */}
       <Button
         onClick={handleClearFilters}
         className="felx gap-2 rounded-xl bg-red-300 hover:bg-red-200"

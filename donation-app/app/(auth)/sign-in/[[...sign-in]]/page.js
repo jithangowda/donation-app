@@ -1,19 +1,26 @@
 import { SignIn } from "@clerk/nextjs";
 
+// Functional component for the login page
 export default function Page() {
   return (
-    <section className="bg-white ">
+    <section className="bg-white">
+      {/* Grid layout for responsive design */}
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className=" relative flex h-32 bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+        {/* Left section with background image */}
+        <section className="relative flex h-32 bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+          {/* Background image */}
           <img
             alt=""
             src="login.jpg"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
           />
 
+          {/* Content for larger screens */}
           <div className="hidden lg:my-20 lg:content-end lg:relative lg:block lg:p-12">
+            {/* Home link */}
             <a className="block text-white" href="/">
               <span className="sr-only">Home</span>
+              {/* Home icon */}
               <svg
                 className="h-8 sm:h-10"
                 viewBox="0 0 28 24"
@@ -27,24 +34,30 @@ export default function Page() {
               </svg>
             </a>
 
+            {/* Title */}
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
               Welcome to Donatory 😋
             </h2>
 
+            {/* Description */}
             <p className="mt-4 leading-relaxed text-white/90">
               This is a 6th sem mini project
             </p>
           </div>
         </section>
 
+        {/* Main section for sign-in form */}
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl">
+            {/* Responsive layout for smaller screens */}
             <div className="relative -mt-16 block lg:hidden">
+              {/* Home link */}
               <a
                 className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
                 href="/"
               >
                 <span className="sr-only">Home</span>
+                {/* Home icon */}
                 <svg
                   className="h-8 sm:h-10"
                   viewBox="0 0 28 24"
@@ -58,15 +71,19 @@ export default function Page() {
                 </svg>
               </a>
 
+              {/* Title */}
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                 Welcome to Donatory 😋
               </h1>
 
+              {/* Description */}
               <p className="mt-4 leading-relaxed text-gray-500">
                 This is a 6th sem mini project
               </p>
             </div>
-            <SignIn />;
+
+            {/* Sign-in form */}
+            <SignIn />
           </div>
         </main>
       </div>
