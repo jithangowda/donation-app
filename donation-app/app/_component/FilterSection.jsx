@@ -41,7 +41,11 @@ function FilterSection({
   const [date, setDate] = useState();
   const handleDateSelect = (selectedDate) => {
     setDate(selectedDate);
-    setFilterDate(selectedDate); // Pass selected date to parent component or wherever needed
+
+    const formattedDate = selectedDate
+      ? format(selectedDate, "yyyy-MM-dd")
+      : null;
+    setFilterDate(formattedDate);
   };
 
   const handleClearFilters = () => {

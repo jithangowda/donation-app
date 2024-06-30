@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Listing from "./Listing.jsx";
 import { supabase } from "@/utils/supabase/client.js";
 import { format } from "date-fns";
+import GoogleMapsSection from "./GoogleMapsSection.jsx";
 
 function ListingMapView() {
   const [listing, setListing] = useState([]);
@@ -11,6 +12,7 @@ function ListingMapView() {
   const [filterOrganizerType, setFilterOrganizerType] = useState(null);
   const [filterDonationNeeds, setFilterDonationNeeds] = useState(null);
   const [filterDate, setFilterDate] = useState(null);
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
 
   useEffect(() => {
     getLatestListing();
@@ -47,6 +49,7 @@ function ListingMapView() {
     const { data, error } = await query;
 
     if (data) {
+      console.log(data);
       setListing(data);
     }
     if (error) {
@@ -64,6 +67,8 @@ function ListingMapView() {
     if (!searchedAddress) {
       return; // Handle case where no address is selected
     }
+
+    setIsSearchClicked(true); // Set search clicked state to true
 
     const searchTerm = searchedAddress.label; // Assuming label is where the address text is stored
     let query = supabase
@@ -95,6 +100,7 @@ function ListingMapView() {
     const { data, error } = await query;
 
     if (data) {
+      console.log(data);
       setListing(data);
     }
     if (error) {
@@ -108,16 +114,37 @@ function ListingMapView() {
     }
   };
 
-  const resetFilters = () => {
+  const resetFilters = async () => {
+    setIsSearchClicked(false); // Reset search clicked state
+    setSearchedAddress(null); // Clear searched address
     setFilterDonationType(null);
     setFilterOrganizerType(null);
     setFilterDonationNeeds(null);
     setFilterDate(null);
-    getLatestListing(); // Fetch latest listings without filters
+
+    const { data, error } = await supabase
+      .from("listing")
+      .select(`*, listingImages(url, listing_id)`)
+      .eq("active", true)
+      .order("id", { ascending: false });
+
+    if (data) {
+      setListing(data);
+    }
+    if (error) {
+      console.error("Error fetching data:", error.message);
+      toast.error("Server Side Error", {
+        duration: 2000,
+        style: {
+          background: "#E3342F",
+        },
+      });
+    }
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
+      {/* listing section */}
       <div>
         <Listing
           listing={listing}
@@ -128,9 +155,14 @@ function ListingMapView() {
           setFilterDonationNeeds={setFilterDonationNeeds}
           setFilterDate={setFilterDate}
           resetFilters={resetFilters}
+          isSearchClicked={isSearchClicked} // Pass state to Listing
         />
       </div>
-      <div>Map</div>
+
+      {/* map section */}
+      <div>
+        <GoogleMapsSection />
+      </div>
     </div>
   );
 }

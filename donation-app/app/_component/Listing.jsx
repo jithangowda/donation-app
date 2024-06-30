@@ -28,6 +28,7 @@ function Listing({
   setFilterDonationNeeds,
   setFilterDate,
   resetFilters,
+  isSearchClicked,
 }) {
   const [address, setAddress] = useState();
   // organizer type switch case
@@ -96,7 +97,7 @@ function Listing({
       />
 
       {/* text to show no. of listings available */}
-      {address && (
+      {isSearchClicked && address && (
         <div className="px-3 mb-2">
           <h2 className="text-lg">
             Found <span className="font-bold">{listing?.length}</span> Result in{" "}
