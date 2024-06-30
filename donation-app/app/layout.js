@@ -3,6 +3,7 @@ import "./globals.css";
 import Provider from "./Provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { headers } from "next/headers.js";
 
 const epilogue = Epilogue({ subsets: ["latin"] });
 

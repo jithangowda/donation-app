@@ -249,12 +249,18 @@ function EditListing({ params }) {
                       // onValueChange={(v) => (values.donationType = v)}
                     >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Offer" id="Offer" />
-                        <Label htmlFor="Offer">Offer</Label>
+                        <RadioGroupItem
+                          value="Donation Offer"
+                          id="Donation Offer"
+                        />
+                        <Label htmlFor="Donation Offer">Donation Offer</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Request" id="Request" />
-                        <Label htmlFor="Request">Request</Label>
+                        <RadioGroupItem
+                          value="Donation Request"
+                          id="Donation Request"
+                        />
+                        <Label htmlFor="Dontion Request">Dontion Request</Label>
                       </div>
                     </RadioGroup>
                   </div>

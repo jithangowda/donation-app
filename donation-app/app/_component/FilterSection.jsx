@@ -64,13 +64,13 @@ function FilterSection({
           <SelectValue placeholder="Type" />
         </SelectTrigger>
         <SelectContent className="bg-white">
-          <SelectItem value="Offer">
+          <SelectItem value="Donation Offer">
             <div className="flex items-center gap-2">
               <ChevronsUp size={20} strokeWidth={2} className="h-4 w-4" />
               <h2>Offer</h2>
             </div>
           </SelectItem>
-          <SelectItem value="Request">
+          <SelectItem value="Donation Request">
             <div className="flex items-center gap-2">
               <ChevronsDown size={20} strokeWidth={2} className="h-4 w-4" />
               <h2>Request</h2>

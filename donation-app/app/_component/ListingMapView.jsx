@@ -13,6 +13,7 @@ function ListingMapView() {
   const [filterDonationNeeds, setFilterDonationNeeds] = useState(null);
   const [filterDate, setFilterDate] = useState(null);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [coordinates, setCoordinates] = useState(false);
 
   useEffect(() => {
     getLatestListing();
@@ -121,6 +122,7 @@ function ListingMapView() {
     setFilterOrganizerType(null);
     setFilterDonationNeeds(null);
     setFilterDate(null);
+    setCoordinates(null);
 
     const { data, error } = await supabase
       .from("listing")
@@ -155,13 +157,14 @@ function ListingMapView() {
           setFilterDonationNeeds={setFilterDonationNeeds}
           setFilterDate={setFilterDate}
           resetFilters={resetFilters}
-          isSearchClicked={isSearchClicked} // Pass state to Listing
+          isSearchClicked={isSearchClicked}
+          setCoordinates={setCoordinates}
         />
       </div>
 
       {/* map section */}
-      <div>
-        <GoogleMapsSection />
+      <div className="fixed right-10 w-[46%] ">
+        <GoogleMapsSection coordinates={coordinates} />
       </div>
     </div>
   );
