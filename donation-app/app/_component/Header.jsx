@@ -96,10 +96,9 @@ function Header() {
         )}
       </section>
 
-      <FiMenu
-        onClick={openSideMenu}
-        className="cursor-pointer text-4xl md:hidden"
-      />
+      <div className="md:hidden ml-2">
+        <FiMenu onClick={openSideMenu} className="cursor-pointer text-4xl" />
+      </div>
     </div>
   );
 }

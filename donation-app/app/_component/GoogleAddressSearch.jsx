@@ -11,7 +11,7 @@ import { PiMapPinLineDuotone } from "react-icons/pi";
 function GoogleAddressSearch({ selectedAddress, setCoordinates }) {
   return (
     <div className="flex items-center w-full">
-      <PiMapPinLineDuotone className="h-10 w-10 rounded-l-xl text-primary" />
+      <PiMapPinLineDuotone className="h-10 w-10 rounded-l-xl text-primary bg-map-bg" />
       {/* <MapPin className='h-11 w-10 p-2 rounded-l-lg '/> */}
       <GooglePlacesAutocomplete
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY}
