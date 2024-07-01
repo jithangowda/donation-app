@@ -86,8 +86,8 @@ function FilterSection({
 
       {/* Organizer type filter */}
       <Select onValueChange={setFilterOrganizerType}>
-        <SelectTrigger className="w-[250px] rounded-xl border-gray-300">
-          <SelectValue placeholder="Donation Organizer" />
+        <SelectTrigger className="w-[150px] rounded-xl border-gray-300">
+          <SelectValue placeholder="Organizer" />
         </SelectTrigger>
         <SelectContent className="bg-white">
           <SelectItem value="Individual">
@@ -156,7 +156,7 @@ function FilterSection({
           <Button
             variant={"outline"}
             className={cn(
-              "w-[200px] justify-start text-left font-normal rounded-xl border-gray-300",
+              "w-[150px] justify-start text-left font-normal rounded-xl border-gray-300",
               !date && "text-muted-foreground"
             )}
           >
@@ -177,7 +177,7 @@ function FilterSection({
       {/* Clear filters button */}
       <Button
         onClick={handleClearFilters}
-        className="felx gap-2 rounded-xl bg-red-300 hover:bg-red-200"
+        className="felx w-[121px] gap-2 rounded-xl bg-red-300 hover:bg-red-200"
       >
         <CircleX size={20} strokeWidth={2} className="h-6 w-6" />
         <h2 className="mt-1">Clear</h2>

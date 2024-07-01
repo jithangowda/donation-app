@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       colors: {
         "map-bg": "#DDFFCC",
+        color1: "#FFFF00",
+        Cream: "#FFFDE7",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

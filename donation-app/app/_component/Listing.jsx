@@ -18,6 +18,7 @@ import React, { useState } from "react"; // React imports
 import GoogleAddressSearch from "./GoogleAddressSearch.jsx"; // Google address search component
 import { Button } from "@/components/ui/button.jsx"; // Button component
 import FilterSection from "./FilterSection.jsx"; // Filter section component
+import OpenGoogleMapsPage from "./OpenGoogleMapsPage.jsx";
 
 function Listing({
   listing, // List of listings to display
@@ -78,6 +79,7 @@ function Listing({
   return (
     <div>
       {/* Search and filter section */}
+
       <div className="p-3 flex flex-col sm:flex-row gap-6 sm:gap-3">
         {/* Google address search component */}
         <GoogleAddressSearch
@@ -114,13 +116,13 @@ function Listing({
       )}
 
       {/* Grid for listing items */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-2 gap-4">
         {/* Render each listing item */}
         {listing?.length > 0
           ? listing?.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-2"
+                className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-1.5"
               >
                 {/* Display listing image */}
                 <Image
@@ -130,15 +132,22 @@ function Listing({
                   className="rounded-xl object-cover h-[170px]"
                 />
                 <div className="flex flex-col m-2 gap-2 flex-grow">
-                  {/* Display donation type */}
-                  <div
-                    className={`rounded-xl w-fit p-2 ${
-                      item.donationType === "Donation Offer"
-                        ? "bg-[#2196F3]"
-                        : "bg-[#FF9800]"
-                    }`}
-                  >
-                    <h2 className="font-semibold">{item.donationType}</h2>
+                  {/* Display donation type "bg-[#2196F3]" "bg-[#FF9800]" */}
+                  <div className="flex justify-between gap-2">
+                    <div
+                      className={`rounded-xl  p-2  ${
+                        item.donationType === "Donation Offer"
+                          ? "bg-[#A0D6E8]"
+                          : "bg-[#FBCEB1]"
+                      }`}
+                    >
+                      <h2 className="font-semibold text-sm">
+                        {item.donationType}
+                      </h2>
+                    </div>
+                    <div>
+                      <OpenGoogleMapsPage address={item.address} />
+                    </div>
                   </div>
 
                   {/* Display address */}
@@ -172,13 +181,13 @@ function Listing({
                   {/* Display organizer type and donation needs */}
                   <div className="mt-auto grid grid-rows gap-2">
                     {/* Organizer type */}
-                    <h2 className="flex w-full gap-2 text-sm bg-slate-200 rounded-xl p-2 text-gray-500 justify-center items-center whitespace-nowrap">
+                    <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
                       {getOrganizerIcon(item.organizerType)}
                       <span>{item.organizerType}</span>
                     </h2>
 
                     {/* Donation needs */}
-                    <h2 className="flex w-full gap-2 text-sm bg-slate-200 rounded-xl p-2 text-gray-500 justify-center items-center whitespace-nowrap">
+                    <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
                       {getNeedsIcon(item.donationNeeds)}
                       <span>{item.donationNeeds}</span>
                     </h2>
