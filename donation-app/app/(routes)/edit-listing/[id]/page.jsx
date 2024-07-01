@@ -114,8 +114,6 @@ function EditListing({ params }) {
           background: "#E3342F",
         },
       });
-      setLoading(false); // Set loading state to false on error
-      return;
     }
 
     // Iterate through uploaded images and add them to Supabase storage
@@ -135,7 +133,6 @@ function EditListing({ params }) {
       if (error) {
         console.error("Error updating listing:", error.message);
         toast.error("Error while Uploading Images"); // Display error toast on image upload failure
-        setLoading(false); // Set loading state to false on error
       } else {
         // Construct image URL
         const imageURL = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
@@ -147,8 +144,7 @@ function EditListing({ params }) {
           .select();
 
         if (error) {
-          setLoading(false); // Set loading state to false on error
-          return;
+          console.error("Error inserting image URL:", error.message);
         }
       }
     }
@@ -219,7 +215,7 @@ function EditListing({ params }) {
       {/* Formik form for handling form state and submission */}
       <Formik
         initialValues={{
-          donationType: listing.donationType || "", // Initialize form values with listing data or empty string
+          donationType: listing.donationType || "",
           organizerType: listing.organizerType || "",
           driveName: listing.driveName || "",
           donationNeeds: listing.donationNeeds || "",
@@ -247,10 +243,11 @@ function EditListing({ params }) {
                     <h2 className="text-sm text-gray-500">
                       Do you want to Offer or Request Donation?
                     </h2>
-                    {/* Radio group for selecting donation type */}
                     <RadioGroup
                       value={values.donationType}
-                      onValueChange={(v) => setFieldValue("donationType", v)}
+                      onValueChange={(v) =>
+                        setFieldValue("donationType", v)
+                      } /* Custom callback to set field value on radio group value change */
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem
@@ -264,7 +261,9 @@ function EditListing({ params }) {
                           value="Donation Request"
                           id="Donation Request"
                         />
-                        <Label htmlFor="Dontion Request">Dontion Request</Label>
+                        <Label htmlFor="Donation Request">
+                          Donation Request
+                        </Label>
                       </div>
                     </RadioGroup>
                   </div>
@@ -274,10 +273,11 @@ function EditListing({ params }) {
                     <h2 className="text-sm text-gray-500">
                       Donation Drive Organizer type?
                     </h2>
-                    {/* Select component for choosing organizer type */}
                     <Select
                       value={values.organizerType}
-                      onValueChange={(e) => (values.organizerType = e)}
+                      onValueChange={(e) =>
+                        setFieldValue("organizerType", e)
+                      } /* Custom callback to set field value on select value change */
                     >
                       <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
                         <SelectValue />
@@ -297,7 +297,6 @@ function EditListing({ params }) {
                     <h2 className="text-sm text-gray-500">
                       Donation Drive Name
                     </h2>
-                    {/* Input field for entering drive name */}
                     <Input
                       value={values.driveName}
                       placeholder={"Ex. Donation Drive 1"}
@@ -316,7 +315,9 @@ function EditListing({ params }) {
                     {/* Select component for choosing donation needs */}
                     <Select
                       value={values.donationNeeds}
-                      onValueChange={(e) => (values.donationNeeds = e)}
+                      onValueChange={(e) =>
+                        setFieldValue("donationNeeds", e)
+                      } /* Custom callback to set field value on select value change */
                     >
                       <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
                         <SelectValue placeholder="Select Donation Needs" />
@@ -333,9 +334,9 @@ function EditListing({ params }) {
                     </Select>
                   </div>
 
-                  {/* Pick Date section */}
+                  {/* pick start date section */}
                   <div className="flex flex-col gap-2">
-                    <h2 className="text-sm text-gray-500">Pick a Date</h2>
+                    <h2 className="text-sm text-gray-500">Pick a Start Date</h2>
                     {/* Popover with calendar component for selecting date range */}
                     <Popover>
                       <PopoverTrigger asChild>
@@ -343,54 +344,87 @@ function EditListing({ params }) {
                           id="date"
                           variant={"outline"}
                           className={cn(
-                            "w-full sm:w-[270px] justify-start text-left font-normal rounded-xl border-gray-300 ",
-                            !date && "text-muted-foreground"
+                            "w-full sm:w-[270px] justify-start text-left font-normal rounded-xl  border-gray-300",
+                            !date?.from && "text-muted-foreground"
                           )}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
-                          {/* Display selected date range or prompt to pick a date */}
+                          {/* Display selected start date or prompt to pick a date */}
                           {date?.from ? (
-                            date.to ? (
-                              <>
-                                {format(date.from, "dd-MM-yyyy")} -{" "}
-                                {format(date.to, "dd-MM-yyyy")}
-                              </>
-                            ) : (
-                              format(date.from, "dd-MM-yyyy")
-                            )
+                            format(date.from, "dd-MM-yyyy")
                           ) : (
                             <span>Pick a date</span>
                           )}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent
-                        className="custom-calendar-container"
+                        className="w-auto p-0 bg-white"
                         align="start"
                         side="bottom"
                       >
-                        {/* Calendar component for selecting date range */}
+                        {/* Calendar component for selecting a single date */}
                         <Calendar
-                          className="custom-calendar"
+                          // className="custom-calendar"
                           initialFocus
-                          mode="range"
-                          defaultMonth={date?.from}
-                          selected={date}
+                          mode="single" // Set mode to "single" for selecting a single date
+                          selected={date?.from} // Use date.from as selected date
                           onSelect={(selectedDate) => {
-                            setDate(selectedDate);
-                            if (selectedDate?.from) {
-                              setFieldValue(
-                                "startDate",
-                                format(selectedDate.from, "yyyy-MM-dd")
-                              );
-                            }
-                            if (selectedDate?.to) {
-                              setFieldValue(
-                                "endDate",
-                                format(selectedDate.to, "yyyy-MM-dd")
-                              );
-                            }
+                            setDate({ from: selectedDate }); // Update date with only start date
+                            setFieldValue(
+                              "startDate",
+                              format(selectedDate, "yyyy-MM-dd")
+                            );
                           }}
-                          numberOfMonths={2}
+                          numberOfMonths={1}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  {/* pick end date section */}
+                  <div className="flex flex-col gap-2">
+                    <h2 className="text-sm text-gray-500">Pick an End Date</h2>
+                    {/* Popover with calendar component for selecting end date */}
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          id="endDate"
+                          variant={"outline"}
+                          className={cn(
+                            "w-full sm:w-[270px] justify-start text-left font-normal rounded-xl border-gray-300",
+                            !date?.to && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {/* Display selected end date or prompt to pick a date */}
+                          {date?.to ? (
+                            format(date.to, "dd-MM-yyyy")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className="w-auto p-0 bg-white"
+                        align="start"
+                        side="bottom"
+                      >
+                        {/* Calendar component for selecting end date */}
+                        <Calendar
+                          initialFocus
+                          mode="single" // Set mode to "single" for selecting a single date
+                          selected={date?.to} // Use date.to as selected date
+                          onSelect={(selectedDate) => {
+                            setDate((prevDate) => ({
+                              ...prevDate,
+                              to: selectedDate,
+                            })); // Update date with end date
+                            setFieldValue(
+                              "endDate",
+                              format(selectedDate, "yyyy-MM-dd")
+                            );
+                          }}
+                          numberOfMonths={1}
                         />
                       </PopoverContent>
                     </Popover>
@@ -490,6 +524,13 @@ function EditListing({ params }) {
           </form>
         )}
       </Formik>
+
+      {/* Loader to indicate loading state */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <Loader size="3rem" color="#10B981" label="Loading..." />
+        </div>
+      )}
     </div>
   );
 }

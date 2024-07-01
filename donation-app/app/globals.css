@@ -37,3 +37,13 @@
       transform: scale(0.85); /* Adjusted scale for small screens */
     }
   }
+
+
+/* hiding annoying scrollbar in pages that causes wobble effect */
+  html {
+    overflow-y: scroll;
+  }
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
