@@ -174,14 +174,16 @@ function FilterSection({
         </PopoverContent>
       </Popover>
 
-      {/* Clear filters button */}
-      <Button
-        onClick={handleClearFilters}
-        className="felx w-[121px] gap-2 rounded-xl bg-red-300 hover:bg-red-200"
-      >
-        <CircleX size={20} strokeWidth={2} className="h-6 w-6" />
-        <h2 className="mt-1">Clear</h2>
-      </Button>
+      {/* Wrapper for search and clear buttons */}
+      <div className="flex flex-col items-start gap-2">
+        <Button
+          onClick={handleClearFilters}
+          className="w-[150px] flex items-center gap-2 rounded-xl bg-red-300 hover:bg-red-200"
+        >
+          <CircleX size={20} strokeWidth={2} className="h-6 w-6" />
+          <h2>Clear</h2>
+        </Button>
+      </div>
     </div>
   );
 }

@@ -19,6 +19,7 @@ import GoogleAddressSearch from "./GoogleAddressSearch.jsx"; // Google address s
 import { Button } from "@/components/ui/button.jsx"; // Button component
 import FilterSection from "./FilterSection.jsx"; // Filter section component
 import OpenGoogleMapsPage from "./OpenGoogleMapsPage.jsx";
+import Link from "next/link.js";
 
 function Listing({
   listing, // List of listings to display
@@ -120,80 +121,83 @@ function Listing({
         {/* Render each listing item */}
         {listing?.length > 0
           ? listing?.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-1.5"
-              >
-                {/* Display listing image */}
-                <Image
-                  src={item.listingImages[0].url}
-                  width={800}
-                  height={150}
-                  className="rounded-xl object-cover h-[170px]"
-                />
-                <div className="flex flex-col m-2 gap-2 flex-grow">
-                  {/* Display donation type "bg-[#2196F3]" "bg-[#FF9800]" */}
-                  <div className="flex justify-between gap-2">
-                    <div
-                      className={`rounded-xl  p-2  ${
-                        item.donationType === "Donation Offer"
-                          ? "bg-[#A0D6E8]"
-                          : "bg-[#FBCEB1]"
-                      }`}
-                    >
-                      <h2 className="font-semibold text-sm">
-                        {item.donationType}
+              <Link href={"/view-listing/" + item.id}>
+                <div
+                  key={index}
+                  className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-1.5"
+                >
+                  {/* Display listing image */}
+                  <Image
+                    src={item.listingImages[0].url}
+                    width={800}
+                    height={150}
+                    className="rounded-xl object-cover h-[170px]"
+                  />
+                  <div className="flex flex-col m-2 gap-2 flex-grow">
+                    {/* Display donation type "bg-[#2196F3]" "bg-[#FF9800]" */}
+                    <div className="flex justify-between gap-2">
+                      <div
+                        className={`rounded-xl  p-2  ${
+                          item.donationType === "Donation Offer"
+                            ? "bg-[#A0D6E8]"
+                            : "bg-[#FBCEB1]"
+                        }`}
+                      >
+                        <h2 className="font-semibold text-sm">
+                          {item.donationType}
+                        </h2>
+                      </div>
+                      <div>
+                        <OpenGoogleMapsPage address={item.address} />
+                      </div>
+                    </div>
+
+                    {/* Display address */}
+                    <h2 className="flex gap-2 text-sm text-gray-400">
+                      <MapPin className="h-4 w-4 flex-shrink-0" />
+                      <span className="flex-grow">{item.address}</span>
+                    </h2>
+
+                    {/* Display drive name */}
+                    <h2 className="flex gap-2 text-sm text-gray-400">
+                      <RectangleEllipsis
+                        size={20}
+                        strokeWidth={2}
+                        className="h-4 w-4 flex-shrink-0"
+                      />
+                      <span className="flex-grow">{item.driveName}</span>
+                    </h2>
+
+                    {/* Display date range */}
+                    <h2 className="flex gap-2 text-sm text-gray-400">
+                      <CalendarDays
+                        size={20}
+                        strokeWidth={2}
+                        className="h-4 w-4 flex-shrink-0"
+                      />
+                      <span className="flex-grow">
+                        {formatDate(item.startDate)} to{" "}
+                        {formatDate(item.endDate)}
+                      </span>
+                    </h2>
+
+                    {/* Display organizer type and donation needs */}
+                    <div className="mt-auto grid grid-rows gap-2">
+                      {/* Organizer type */}
+                      <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
+                        {getOrganizerIcon(item.organizerType)}
+                        <span>{item.organizerType}</span>
+                      </h2>
+
+                      {/* Donation needs */}
+                      <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
+                        {getNeedsIcon(item.donationNeeds)}
+                        <span>{item.donationNeeds}</span>
                       </h2>
                     </div>
-                    <div>
-                      <OpenGoogleMapsPage address={item.address} />
-                    </div>
-                  </div>
-
-                  {/* Display address */}
-                  <h2 className="flex gap-2 text-sm text-gray-400">
-                    <MapPin className="h-4 w-4 flex-shrink-0" />
-                    <span className="flex-grow">{item.address}</span>
-                  </h2>
-
-                  {/* Display drive name */}
-                  <h2 className="flex gap-2 text-sm text-gray-400">
-                    <RectangleEllipsis
-                      size={20}
-                      strokeWidth={2}
-                      className="h-4 w-4 flex-shrink-0"
-                    />
-                    <span className="flex-grow">{item.driveName}</span>
-                  </h2>
-
-                  {/* Display date range */}
-                  <h2 className="flex gap-2 text-sm text-gray-400">
-                    <CalendarDays
-                      size={20}
-                      strokeWidth={2}
-                      className="h-4 w-4 flex-shrink-0"
-                    />
-                    <span className="flex-grow">
-                      {formatDate(item.startDate)} to {formatDate(item.endDate)}
-                    </span>
-                  </h2>
-
-                  {/* Display organizer type and donation needs */}
-                  <div className="mt-auto grid grid-rows gap-2">
-                    {/* Organizer type */}
-                    <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
-                      {getOrganizerIcon(item.organizerType)}
-                      <span>{item.organizerType}</span>
-                    </h2>
-
-                    {/* Donation needs */}
-                    <h2 className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 justify-center items-center whitespace-nowrap">
-                      {getNeedsIcon(item.donationNeeds)}
-                      <span>{item.donationNeeds}</span>
-                    </h2>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           : // Placeholder elements for loading animation
             [1, 2, 3, 4, 5, 6].map((item, index) => (

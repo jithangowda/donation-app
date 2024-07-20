@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* hides scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none; /* Safari and Chrome */

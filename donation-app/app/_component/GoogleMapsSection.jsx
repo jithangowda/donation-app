@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LoadScript, GoogleMap, useLoadScript } from "@react-google-maps/api"; // Imports for Google Maps components
+import MapMarkerItems from "./MapMarkerItems.jsx";
 
 // Styling for the map container
 const mapContainerStyle = {
@@ -8,7 +9,7 @@ const mapContainerStyle = {
   borderRadius: 15, // Rounded corners for map container
 };
 
-function GoogleMaps({ coordinates }) {
+function GoogleMaps({ coordinates, listing }) {
   // Load Google Maps script and check loading status
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY, // API key from environment variable
@@ -38,6 +39,9 @@ function GoogleMaps({ coordinates }) {
         center={center} // Center coordinates of the map
       >
         {/* Add markers, info windows, custom controls, etc. here */}
+        {listing.map((item, index) => (
+          <MapMarkerItems key={index} item={item} />
+        ))}
       </GoogleMap>
     </div>
   );

@@ -177,7 +177,7 @@ function ListingMapView() {
 
       {/* Map section */}
       <div className="fixed right-10 w-[46%]">
-        <GoogleMapsSection coordinates={coordinates} />
+        <GoogleMapsSection listing={listing} coordinates={coordinates} />
       </div>
     </div>
   );
