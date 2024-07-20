@@ -2,6 +2,10 @@ This is a mini project for 6th sem
 
 cd to main folder
 
+```
+cd donation-app/
+```
+
 install all dependencies
 
 ```
