@@ -17,8 +17,8 @@ function MapMarkerItems({ item }) {
         icon={{
           url: "/pin.svg",
           scaledSize: {
-            width: 45,
-            height: 45,
+            width: 40,
+            height: 40,
           },
         }}
       >

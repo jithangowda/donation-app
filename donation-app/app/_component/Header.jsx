@@ -21,15 +21,15 @@ function Header() {
   }, []);
 
   const [animationParent] = useAutoAnimate(); // Formkit auto-animate hook
-  const [isSideMenuOpen, setSideMenu] = useState(false); // State for side menu open/close
+  // const [isSideMenuOpen, setSideMenu] = useState(false); // State for side menu open/close
 
-  function openSideMenu() {
-    setSideMenu(true); // Function to open side menu
-  }
+  // function openSideMenu() {
+  //   setSideMenu(true); // Function to open side menu
+  // }
 
-  function closeSideMenu() {
-    setSideMenu(false); // Function to close side menu
-  }
+  // function closeSideMenu() {
+  //   setSideMenu(false); // Function to close side menu
+  // }
 
   // Render the header component
   return (
@@ -40,7 +40,10 @@ function Header() {
           <Link href={"/"}>
             <Image src={"/logo.svg"} alt="logo" width={170} height={100} />
           </Link>
-          {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />}
+
+          {/* {code for enabling mobile view}
+          {isSideMenuOpen && <MobileNav closeSideMenu={closeSideMenu} />} */}
+
           <div className="hidden md:flex items-center gap-4 transition-all">
             {/* Links to various sections */}
             <Link
@@ -55,8 +58,6 @@ function Header() {
                 >
                   Home
                 </span>
-                {/* Arrow icon for dropdown */}
-                {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
               </p>
             </Link>
 
@@ -66,8 +67,6 @@ function Header() {
             >
               <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
                 <span>About us</span>
-                {/* Arrow icon for dropdown */}
-                {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
               </p>
             </Link>
 
@@ -77,8 +76,6 @@ function Header() {
             >
               <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
                 <span>Contact us</span>
-                {/* Arrow icon for dropdown */}
-                {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
               </p>
             </Link>
           </div>
@@ -109,118 +106,118 @@ function Header() {
           )}
         </section>
 
-        {/* Menu icon for mobile view */}
+        {/* Menu icon for mobile view
         <div className="md:hidden ml-2">
           <FiMenu onClick={openSideMenu} className="cursor-pointer text-4xl" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
 }
 
-// Mobile navigation component
-function MobileNav({ closeSideMenu }) {
-  const { user, isSignedIn } = useUser(); // Clerk user authentication hook
-  const pathname = usePathname(); // Get current pathname from Next.js navigation
+// // Mobile navigation component
+// function MobileNav({ closeSideMenu }) {
+//   const { user, isSignedIn } = useUser(); // Clerk user authentication hook
+//   const pathname = usePathname(); // Get current pathname from Next.js navigation
 
-  useEffect(() => {
-    console.log(pathname); // Log current pathname on component mount
-  }, []);
+//   useEffect(() => {
+//     console.log(pathname); // Log current pathname on component mount
+//   }, []);
 
-  // Render the mobile navigation menu
-  return (
-    <div className="fixed left-0 top-0 flex h-full min-h-screen w-full justify-end bg-black/60 md:hidden z-30">
-      <div className="h-full w-[65%] bg-white px-4 py-4">
-        {/* Close button for mobile menu */}
-        <section className="flex justify-end">
-          <AiOutlineClose
-            onClick={closeSideMenu}
-            className="cursor-pointer text-4xl"
-          />
-        </section>
+//   // Render the mobile navigation menu
+//   return (
+//     <div className="fixed left-0 top-0 flex h-full min-h-screen w-full justify-end bg-black/60 md:hidden z-30">
+//       <div className="h-full w-[65%] bg-white px-4 py-4">
+//         {/* Close button for mobile menu */}
+//         <section className="flex justify-end">
+//           <AiOutlineClose
+//             onClick={closeSideMenu}
+//             className="cursor-pointer text-4xl"
+//           />
+//         </section>
 
-        {/* Links section */}
-        <div className="flex flex-col gap-4 transition-all">
-          {/* Link to home */}
-          <Link
-            href={"/"}
-            onClick={closeSideMenu}
-            className="relative group px-2 py-3 transition-all"
-          >
-            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-              <span
-                className={`hover:text-primary font-medium text-sm cursor-pointer ${
-                  pathname == "/" && "text-primary"
-                }`}
-              >
-                Home
-              </span>
-              {/* Arrow icon for dropdown */}
-              {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
-            </p>
-          </Link>
+//         {/* Links section */}
+//         <div className="flex flex-col gap-4 transition-all">
+//           {/* Link to home */}
+//           <Link
+//             href={"/"}
+//             onClick={closeSideMenu}
+//             className="relative group px-2 py-3 transition-all"
+//           >
+//             <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+//               <span
+//                 className={`hover:text-primary font-medium text-sm cursor-pointer ${
+//                   pathname == "/" && "text-primary"
+//                 }`}
+//               >
+//                 Home
+//               </span>
+//               {/* Arrow icon for dropdown */}
+//               {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
+//             </p>
+//           </Link>
 
-          {/* Link to about us */}
-          <Link
-            href={"/"}
-            onClick={closeSideMenu}
-            className="relative group px-2 py-3 transition-all"
-          >
-            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-              <span>About us</span>
-              {/* Arrow icon for dropdown */}
-              {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
-            </p>
-          </Link>
+//           {/* Link to about us */}
+//           <Link
+//             href={"/"}
+//             onClick={closeSideMenu}
+//             className="relative group px-2 py-3 transition-all"
+//           >
+//             <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+//               <span>About us</span>
+//               {/* Arrow icon for dropdown */}
+//               {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
+//             </p>
+//           </Link>
 
-          {/* Link to contact us */}
-          <Link
-            href={"/"}
-            onClick={closeSideMenu}
-            className="relative group px-2 py-3 transition-all"
-          >
-            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-              <span>Contacts</span>
-              {/* Arrow icon for dropdown */}
-              {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
-            </p>
-          </Link>
-        </div>
+//           {/* Link to contact us */}
+//           <Link
+//             href={"/"}
+//             onClick={closeSideMenu}
+//             className="relative group px-2 py-3 transition-all"
+//           >
+//             <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+//               <span>Contacts</span>
+//               {/* Arrow icon for dropdown */}
+//               {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
+//             </p>
+//           </Link>
+//         </div>
 
-        {/* Actions section */}
-        <section className="flex flex-col items-center gap-8 mt-4">
-          {/* Button to add new listing */}
-          <div className="w-full">
-            <Link href={"/add-new-listing"}>
-              <Button
-                className="flex rounded-xl gap-2"
-                style={{ width: "100%" }}
-                onClick={closeSideMenu}
-              >
-                <PlusIcon className="h-5 w-5" />
-                Post your listing
-              </Button>
-            </Link>
-          </div>
+//         {/* Actions section */}
+//         <section className="flex flex-col items-center gap-8 mt-4">
+//           {/* Button to add new listing */}
+//           <div className="w-full">
+//             <Link href={"/add-new-listing"}>
+//               <Button
+//                 className="flex rounded-xl gap-2"
+//                 style={{ width: "100%" }}
+//                 onClick={closeSideMenu}
+//               >
+//                 <PlusIcon className="h-5 w-5" />
+//                 Post your listing
+//               </Button>
+//             </Link>
+//           </div>
 
-          {/* User authentication button */}
-          {isSignedIn ? (
-            <UserButton />
-          ) : (
-            <Link href={"/sign-in"}>
-              <Button
-                variant="outline"
-                className="rounded-full border-gray bg-gray-50"
-                onClick={closeSideMenu}
-              >
-                Login
-              </Button>
-            </Link>
-          )}
-        </section>
-      </div>
-    </div>
-  );
-}
+//           {/* User authentication button */}
+//           {isSignedIn ? (
+//             <UserButton />
+//           ) : (
+//             <Link href={"/sign-in"}>
+//               <Button
+//                 variant="outline"
+//                 className="rounded-full border-gray bg-gray-50"
+//                 onClick={closeSideMenu}
+//               >
+//                 Login
+//               </Button>
+//             </Link>
+//           )}
+//         </section>
+//       </div>
+//     </div>
+//   );
+// }
 
 export default Header;

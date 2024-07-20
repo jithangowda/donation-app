@@ -17,7 +17,7 @@ function OpenGoogleMapsPage({ address }) {
     <div className="flex justify-center items-center">
       <Button
         onClick={openGoogleMaps}
-        className="w-[50px] rounded-xl flex items-center justify-center bg-[#F4B400]"
+        className="w-[50px] rounded-xl flex items-center justify-center bg-[#F4B400] hover:bg-[#f5db94]"
       >
         <LocateFixed size={28} />
       </Button>

@@ -14,6 +14,8 @@ import {
   Wallet,
 } from "lucide-react";
 import { format } from "date-fns";
+import { Button } from "@/components/ui/button.jsx";
+import Link from "next/link.js";
 
 function MarkerInfobox({ item }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -138,6 +140,11 @@ function MarkerInfobox({ item }) {
           <span>{item.donationNeeds}</span>
         </h2>
       </div>
+
+      {/* View detail */}
+      <Link href={"/view-listing/" + item.id}>
+        <Button className="rounded-full w-full mt-2">View Detail</Button>
+      </Link>
     </div>
   );
 }
