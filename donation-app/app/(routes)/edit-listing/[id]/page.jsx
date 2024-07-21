@@ -280,7 +280,7 @@ function EditListing({ params }) {
                       } /* Custom callback to set field value on select value change */
                     >
                       <SelectTrigger className="w-[220px] rounded-xl border-gray-300">
-                        <SelectValue />
+                        <SelectValue placeholder="Select Organizer Type" />
                       </SelectTrigger>
                       <SelectContent className="bg-white">
                         <SelectItem value="Individual">Individual</SelectItem>
@@ -443,6 +443,7 @@ function EditListing({ params }) {
                       name="description"
                       className="rounded-xl border-gray-300"
                       onChange={handleChange}
+                      rows={10}
                     />
                   </div>
                 </div>
@@ -483,7 +484,7 @@ function EditListing({ params }) {
                         {loading ? (
                           <Loader className="animate-spin" />
                         ) : (
-                          "Save and Publish"
+                          "Publish"
                         )}
                       </Button>
                     </AlertDialogTrigger>

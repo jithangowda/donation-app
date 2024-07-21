@@ -79,7 +79,7 @@ function Details({ listingDetail }) {
 
   const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${
     process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY
-  }&q=${encodeURIComponent(listingDetail.address)}&zoom=13`;
+  }&q=${encodeURIComponent(listingDetail.address)}&zoom=13&maptype=roadmap`;
 
   return (
     <div className="max-w-screen-lg mx-auto p-4">

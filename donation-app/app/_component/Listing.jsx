@@ -128,7 +128,7 @@ function Listing({
                 >
                   {/* Display listing image */}
                   <Image
-                    src={item.listingImages[0].url}
+                    src={item?.listingImages[0]?.url}
                     width={800}
                     height={150}
                     className="rounded-xl object-cover h-[170px]"
