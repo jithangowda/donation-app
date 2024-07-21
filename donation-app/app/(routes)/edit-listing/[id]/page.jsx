@@ -100,7 +100,7 @@ function EditListing({ params }) {
     if (data) {
       // Display success toast notification on successful update
       toast.success("Listing Updated Successfully", {
-        duration: 2000,
+        duration: 5000,
         style: {
           background: "#90D26D",
         },
@@ -109,7 +109,7 @@ function EditListing({ params }) {
       console.error("Error updating listing:", error.message);
       // Display error toast notification on failed update
       toast.error("Failed to update listing", {
-        duration: 2000,
+        duration: 5000,
         style: {
           background: "#E3342F",
         },
@@ -167,7 +167,7 @@ function EditListing({ params }) {
         console.error("Error publishing listing:", error.message);
         // Display error toast notification on publishing failure
         toast.error("Failed to publish listing", {
-          duration: 2000,
+          duration: 5000,
           style: {
             background: "#E3342F",
           },
@@ -176,7 +176,7 @@ function EditListing({ params }) {
         console.log("Listing published Successfully", data);
         // Display success toast notification on successful publish
         toast.success("Listing Published Successfully", {
-          duration: 2000,
+          duration: 5000,
           style: {
             background: "#90D26D",
           },
@@ -186,7 +186,7 @@ function EditListing({ params }) {
       console.error("Unexpected error:", err);
       // Display error toast notification on unexpected error
       toast.error("Failed to publish listing due to unexpected error", {
-        duration: 2000,
+        duration: 5000,
         style: {
           background: "#E3342F",
         },

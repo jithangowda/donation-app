@@ -41,7 +41,7 @@ function AddNewListing() {
 
         // Show success toast notification
         toast.success("New Address added for listing", {
-          duration: 2000,
+          duration: 5000,
           style: {
             background: "#90D26D", // Green background color for success
           },
@@ -57,7 +57,7 @@ function AddNewListing() {
 
         // Show error toast notification
         toast.error("Error Occured", {
-          duration: 2000,
+          duration: 5000,
           style: {
             background: "#E57373", // Red background color for error
           },

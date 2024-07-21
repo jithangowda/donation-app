@@ -21,10 +21,22 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button.jsx";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Link from "next/link.js";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 function UserListingsProfileModalSection({ onClose }) {
   const { user } = useUser();
-  const [listing, setListing] = useState();
+  const [listing, setListing] = useState([]);
+  const [deletionError, setDeletionError] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [currentListingId, setCurrentListingId] = useState(null);
 
   useEffect(() => {
     user && GetUserListing();
@@ -83,6 +95,54 @@ function UserListingsProfileModalSection({ onClose }) {
     width: fullWidth ? "100%" : "120px",
     height: "34px", // Slightly smaller height
   });
+
+  const openDeleteDialog = (listingId) => {
+    setCurrentListingId(listingId);
+    setIsDialogOpen(true);
+  };
+
+  const deleteListing = async () => {
+    if (!currentListingId) return;
+
+    // Delete associated images first
+    const { error: imageDeleteError } = await supabase
+      .from("listingImages")
+      .delete()
+      .eq("listing_id", currentListingId);
+
+    if (imageDeleteError) {
+      console.error("Error deleting listing images:", imageDeleteError);
+      // Handle image deletion error (optional)
+      return;
+    }
+
+    // Then proceed with deleting the listing
+    const { error } = await supabase
+      .from("listing")
+      .delete()
+      .eq("id", currentListingId);
+
+    if (error) {
+      setDeletionError(error);
+      console.error("Error deleting listing:", error);
+      return;
+    }
+
+    // Listing deleted successfully, update listings state
+    const updatedListings = listing.filter(
+      (item) => item.id !== currentListingId
+    );
+    setListing(updatedListings);
+    setDeletionError(null); // Clear any previous errors
+    setIsDialogOpen(false); // Close the dialog
+
+    toast.success("The listing has been successfully deleted", {
+      duration: 5000,
+      style: {
+        background: "#90D26D", // Green background color for success
+      },
+    });
+  };
 
   return (
     <div>
@@ -227,6 +287,7 @@ function UserListingsProfileModalSection({ onClose }) {
                   <Button
                     size="sm"
                     className="rounded-xl ml-auto bg-red-500 text-white hover:bg-red-400"
+                    onClick={() => openDeleteDialog(item.id)}
                   >
                     <FaRegTrashCan className="text-xl" />
                   </Button>
@@ -235,6 +296,42 @@ function UserListingsProfileModalSection({ onClose }) {
             </div>
           ))}
       </div>
+      {/* Confirmation Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogTrigger>
+          {/* Trigger Button is not used here since the dialog is opened programmatically */}
+        </DialogTrigger>
+        <DialogContent className="bg-white rounded-xl">
+          <DialogHeader>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this listing? This action cannot
+              be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-4 mt-4">
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              className="rounded-xl border-gray-400 hover:bg-gray-100"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={deleteListing}
+              className="rounded-xl bg-red-600 text-white hover:bg-red-400"
+            >
+              Confirm
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {deletionError && (
+        <div className="text-red-500 mt-4">
+          Error deleting listing: {deletionError.message}
+        </div>
+      )}
     </div>
   );
 }

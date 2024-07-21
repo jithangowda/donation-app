@@ -63,7 +63,7 @@ function ListingMapView() {
       console.error("Error fetching data:", error.message);
       // Example of handling errors with toast notifications
       toast.error("Server Side Error", {
-        duration: 2000,
+        duration: 5000,
         style: {
           background: "#E3342F",
         },
@@ -148,7 +148,7 @@ function ListingMapView() {
       console.error("Error fetching data:", error.message);
       // Example of handling errors with toast notifications
       toast.error("Server Side Error", {
-        duration: 2000,
+        duration: 5000,
         style: {
           background: "#E3342F",
         },
