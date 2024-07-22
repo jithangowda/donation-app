@@ -21,7 +21,7 @@ function GoogleAddressSearch({ selectedAddress, setCoordinates }) {
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY} // API key for Google Places API
         selectProps={{
           value: address, // Current selected address
-          placeholder: "Search Address", // Placeholder text
+          placeholder: "Search . . .", // Placeholder text
           isClearable: true, // Allow clearing of selected address
           className: "w-full", // Full-width styling
           onChange: (place) => {
