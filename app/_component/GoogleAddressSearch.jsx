@@ -3,48 +3,44 @@ import React, { useState } from "react";
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
-} from "react-google-places-autocomplete";
-import { PiMapPinLineDuotone } from "react-icons/pi";
+} from "react-google-places-autocomplete"; // Import for Google Places Autocomplete
+import { RiMapPinAddFill } from "react-icons/ri"; // Icon import for map pin
+import { PiMapPinLineDuotone } from "react-icons/pi"; // Icon import for map pin (alternate)
 
 function GoogleAddressSearch({ selectedAddress, setCoordinates }) {
   const [address, setAddress] = useState(null); // State to store selected address
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // Handle window resize to update isMobile state
-  React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Determine the placeholder text based on screen size
-  const placeholder = isMobile ? "Address . . ." : "Search Address . . .";
-
+  // Render the component
   return (
     <div className="flex items-center w-full">
+      {/* Display map pin icon */}
       <PiMapPinLineDuotone className="h-10 w-10 rounded-l-xl text-primary bg-map-bg" />
 
+      {/* Google Places Autocomplete component */}
       <GooglePlacesAutocomplete
-        apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY}
+        apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY} // API key for Google Places API
         selectProps={{
-          value: address,
-          placeholder, // Use the dynamically determined placeholder
-          isClearable: true,
-          className: "w-full",
+          value: address, // Current selected address
+          placeholder: "Search Address", // Placeholder text
+          isClearable: true, // Allow clearing of selected address
+          className: "w-full", // Full-width styling
           onChange: (place) => {
-            setAddress(place);
+            setAddress(place); // Update selected address state
 
+            // If an address is selected
             if (place) {
-              selectedAddress(place);
+              selectedAddress(place); // Callback to parent with selected place
 
+              // Retrieve latitude and longitude from selected address
               geocodeByAddress(place.label)
                 .then((result) => getLatLng(result[0]))
                 .then(({ lat, lng }) => {
-                  setCoordinates({ lat, lng });
+                  setCoordinates({ lat, lng }); // Set coordinates in parent component
                 });
             } else {
-              selectedAddress(null);
-              setCoordinates(null);
+              // Clear the coordinates when the address is cleared
+              selectedAddress(null); // Clear selected address in parent
+              setCoordinates(null); // Clear coordinates in parent
             }
           },
         }}
