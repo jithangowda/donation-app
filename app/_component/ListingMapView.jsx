@@ -159,8 +159,13 @@ function ListingMapView() {
   // Render the listing map view component
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
+      {/* Map section */}
+      <div className="order-1 md:order-2 md:fixed md:right-10 md:w-[46%]  ]">
+        <GoogleMapsSection listing={listing} coordinates={coordinates} />
+      </div>
+
       {/* Listing section */}
-      <div>
+      <div className="order-2 md:order-1">
         <Listing
           listing={listing}
           handleSearchClick={handleSearchClick}
@@ -174,11 +179,6 @@ function ListingMapView() {
           setCoordinates={setCoordinates}
         />
       </div>
-
-      {/* Map section */}
-      {/* <div className="fixed right-10 w-[46%]">
-        <GoogleMapsSection listing={listing} coordinates={coordinates} />
-      </div> */}
     </div>
   );
 }

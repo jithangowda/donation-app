@@ -154,3 +154,9 @@
     display: none;
   }
 }
+
+
+.map-container {
+  border-radius: 15px; /* Rounded corners */
+  overflow: hidden; /* Ensure the map respects the border-radius */
+}
