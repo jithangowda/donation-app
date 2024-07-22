@@ -62,10 +62,10 @@ function FilterSection({
   };
 
   return (
-    <div className="px-3 mb-4 md:gap-2 md:flex flex gap-2">
+    <div className="px-3 mb-4 grid grid-cols-2 gap-2 md:flex md:gap-2">
       {/* Donation type filter */}
       <Select onValueChange={setFilterDonationType}>
-        <SelectTrigger className="w-[130px] rounded-xl border-gray-300">
+        <SelectTrigger className="md:w-[130px] w-full rounded-xl border-gray-300">
           <SelectValue placeholder="Type" />
         </SelectTrigger>
         <SelectContent className="bg-white">
@@ -86,7 +86,7 @@ function FilterSection({
 
       {/* Organizer type filter */}
       <Select onValueChange={setFilterOrganizerType}>
-        <SelectTrigger className="w-[150px] rounded-xl border-gray-300">
+        <SelectTrigger className="md:w-[180px] w-full rounded-xl border-gray-300">
           <SelectValue placeholder="Organizer" />
         </SelectTrigger>
         <SelectContent className="bg-white">
@@ -113,8 +113,8 @@ function FilterSection({
 
       {/* Donation needs filter */}
       <Select onValueChange={setFilterDonationNeeds}>
-        <SelectTrigger className="w-[190px] rounded-xl border-gray-300">
-          <SelectValue placeholder="Donation Needs" />
+        <SelectTrigger className="md:w-[190px] w-full rounded-xl border-gray-300">
+          <SelectValue placeholder="Needs" />
         </SelectTrigger>
         <SelectContent className="bg-white">
           <SelectItem value="Food">
@@ -156,7 +156,7 @@ function FilterSection({
           <Button
             variant={"outline"}
             className={cn(
-              "w-[150px] justify-start text-left font-normal rounded-xl border-gray-300",
+              "md:w-[150px] w-full justify-start text-left font-normal rounded-xl border-gray-300",
               !date && "text-muted-foreground"
             )}
           >
@@ -175,10 +175,10 @@ function FilterSection({
       </Popover>
 
       {/* Wrapper for search and clear buttons */}
-      <div className="flex flex-col items-start gap-2">
+      <div className="col-span-2 flex justify-center md:items-start md:justify-start md:flex-col md:gap-2">
         <Button
           onClick={handleClearFilters}
-          className="w-[150px] flex items-center gap-2 rounded-xl bg-red-300 hover:bg-red-200"
+          className="w-[120px] flex items-center gap-2 rounded-xl bg-red-300 hover:bg-red-200"
         >
           <CircleX size={20} strokeWidth={2} className="h-6 w-6" />
           <h2>Clear</h2>

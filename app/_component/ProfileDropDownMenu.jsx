@@ -27,10 +27,10 @@ function ProfileDropDownMenu({ user }) {
   };
 
   return (
-    <div>
+    <div className="relative">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="shine-effect">
+          <div className="shine-effect cursor-pointer">
             <Image
               src={user?.imageUrl || "/default-profile.png"}
               width={40}
@@ -40,17 +40,20 @@ function ProfileDropDownMenu({ user }) {
             />
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="dropdown-left bg-white w-[360px] rounded-xl p-3">
+        <DropdownMenuContent className="absolute top-full left-1/2 transform -translate-x-1/2 md:left-auto md:transform-none md:-translate-x-6 md:w-[360px] md:right-0 mt-2 bg-white w-[250px] max-w-[90vw] rounded-xl p-3">
           <DropdownMenuLabel>
-            <div className="flex items-center space-x-3">
-              <Image
-                src={user?.imageUrl || "/default-profile.png"}
-                width={40}
-                height={40}
-                alt="profile"
-                className="rounded-full"
-              />
-              <div>
+            <div className="flex flex-col md:flex-row items-center space-x-3 md:space-x-4">
+              {/* Hide profile picture on mobile view */}
+              <div className="hidden md:block">
+                <Image
+                  src={user?.imageUrl || "/default-profile.png"}
+                  width={40}
+                  height={40}
+                  alt="profile"
+                  className="rounded-full"
+                />
+              </div>
+              <div className="text-center md:text-left">
                 <h2 className="text-md font-medium">
                   {user?.fullName || "Guest"}
                 </h2>
@@ -60,7 +63,7 @@ function ProfileDropDownMenu({ user }) {
               </div>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator className="border-t border-gray-200 my-2 " />
+          <DropdownMenuSeparator className="border-t border-gray-200 my-2" />
           <DropdownMenuItem className="flex items-center px-4 py-2">
             <button
               onClick={handleManageAccountClick}
@@ -72,9 +75,7 @@ function ProfileDropDownMenu({ user }) {
               </div>
             </button>
           </DropdownMenuItem>
-
-          <DropdownMenuSeparator className="border-t border-gray-200 my-2 " />
-
+          <DropdownMenuSeparator className="border-t border-gray-200 my-2" />
           <DropdownMenuItem className="flex items-center px-4 py-2">
             <SignOutButton className="flex items-center w-full cursor-pointer">
               <div className="flex items-center">

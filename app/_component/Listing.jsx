@@ -81,20 +81,28 @@ function Listing({
     <div>
       {/* Search and filter section */}
 
-      <div className="p-3 flex flex-col sm:flex-row gap-6 sm:gap-3">
+      <div className="p-3 flex flex-col-2 md:flex-row md:gap-3 gap-2 items-center">
         {/* Google address search component */}
-        <GoogleAddressSearch
-          selectedAddress={(v) => {
-            searchedAddress(v);
-            setAddress(v);
-          }}
-          setCoordinates={setCoordinates}
-        />
+        <div className="flex-grow md:w-[calc(100%-120px)]">
+          <GoogleAddressSearch
+            selectedAddress={(v) => {
+              searchedAddress(v);
+              setAddress(v);
+            }}
+            setCoordinates={setCoordinates}
+            className="w-full"
+          />
+        </div>
         {/* Button to trigger search */}
-        <Button onClick={handleSearchClick} className="flex gap-2 rounded-xl">
-          <Search className="h-5 w-5 " />
-          <h2 className="mt-1">Search</h2>
-        </Button>
+        <div className="flex-shrink-0 md:w-[120px]">
+          <Button
+            onClick={handleSearchClick}
+            className="flex items-center gap-2 rounded-xl w-full"
+          >
+            <Search className="h-5 w-5" />
+            <h2 className="mt-1 hidden md:block">Search</h2>
+          </Button>
+        </div>
       </div>
 
       {/* Filter section */}

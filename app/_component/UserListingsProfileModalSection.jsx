@@ -147,7 +147,7 @@ function UserListingsProfileModalSection({ onClose }) {
   return (
     <div>
       <h2 className="font-semibold text-md mb-2">Manage your Listings</h2>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {listing &&
           listing.map((item, index) => (
             <div
@@ -233,7 +233,7 @@ function UserListingsProfileModalSection({ onClose }) {
 
                 <div className="mt-auto grid gap-2">
                   <h2
-                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center whitespace-nowrap"
+                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
                     style={item.active ? {} : getSkeletonStyle(true)}
                   >
                     {item.active ? (
@@ -247,7 +247,7 @@ function UserListingsProfileModalSection({ onClose }) {
                   </h2>
 
                   <h2
-                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center whitespace-nowrap"
+                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
                     style={item.active ? {} : getSkeletonStyle(true)}
                   >
                     {item.active ? (
