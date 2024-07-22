@@ -94,7 +94,7 @@ function Listing({
           />
         </div>
         {/* Button to trigger search */}
-        <div className="flex-shrink-0 md:w-[118px] ">
+        <div className="flex-shrink-0 md:w-[120px]">
           <Button
             onClick={handleSearchClick}
             className="flex items-center gap-2 rounded-xl w-full"
