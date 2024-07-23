@@ -94,7 +94,7 @@ function Listing({
           />
         </div>
         {/* Button to trigger search */}
-        <div className="flex-shrink-0 md:w-[118px]">
+        <div className="flex-shrink-0 md:w-[118px] hidden md:block">
           <Button
             onClick={handleSearchClick}
             className="flex items-center gap-2 rounded-xl w-full"
@@ -112,6 +112,7 @@ function Listing({
         setFilterDonationNeeds={setFilterDonationNeeds}
         setFilterDate={setFilterDate}
         resetFilters={resetFilters}
+        handleSearchClick={handleSearchClick}
       />
 
       {/* Display search result */}
@@ -139,6 +140,7 @@ function Listing({
                     src={item?.listingImages[0]?.url}
                     width={800}
                     height={150}
+                    alt="listing image"
                     className="rounded-xl object-cover h-[170px]"
                   />
                   <div className="flex flex-col m-2 gap-2 flex-grow">

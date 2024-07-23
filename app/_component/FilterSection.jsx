@@ -13,6 +13,7 @@ import {
   CircleX,
   HandHelping,
   PencilRuler,
+  Search,
   Shirt,
   User,
   Users,
@@ -37,6 +38,7 @@ function FilterSection({
   setFilterDonationNeeds,
   setFilterDate,
   resetFilters,
+  handleSearchClick,
 }) {
   const [date, setDate] = useState(); // State for selected date in the calendar
 
@@ -62,7 +64,30 @@ function FilterSection({
   };
 
   return (
-    <div className="px-3 mb-4 grid grid-cols-2 gap-2 md:flex md:gap-2">
+    <div className="col-span-2  px-3  grid grid-cols-2 gap-2 md:flex md:gap-2 mb-[180px] md:mb-4">
+      {/* clear and search button only visible on mobile */}
+      <div className="flex md:hidden col-span-2  justify-center gap-1 ml-[15px]">
+        <div>
+          <Button
+            onClick={handleClearFilters}
+            className="w-[120px] flex items-center gap-2 rounded-xl bg-red-300 hover:bg-red-200"
+          >
+            <CircleX size={20} strokeWidth={2} className="h-6 w-6" />
+            <h2>Clear</h2>
+          </Button>
+        </div>
+
+        <div className="w-full">
+          <Button
+            onClick={handleSearchClick}
+            className="flex items-center gap-2 rounded-xl w-[120px] "
+          >
+            <Search className="h-5 w-5" />
+            <h2 className="mt-1">Search</h2>
+          </Button>
+        </div>
+      </div>
+
       {/* Donation type filter */}
       <Select onValueChange={setFilterDonationType}>
         <SelectTrigger className="md:w-[130px] w-full rounded-xl border-gray-300">
@@ -116,7 +141,7 @@ function FilterSection({
         <SelectTrigger className="md:w-[190px] w-full rounded-xl border-gray-300">
           <SelectValue placeholder="Needs" />
         </SelectTrigger>
-        <SelectContent className="bg-white">
+        <SelectContent className="bg-white ">
           <SelectItem value="Food">
             <div className="flex items-center gap-2">
               <UtensilsCrossed size={20} strokeWidth={2} className="h-4 w-4" />
@@ -175,7 +200,7 @@ function FilterSection({
       </Popover>
 
       {/* Wrapper for search and clear buttons */}
-      <div className="col-span-2 flex justify-center md:items-start md:justify-start md:flex-col md:gap-2">
+      <div className="hidden md:flex col-span-2 mb-0 justify-center gap-2 md:items-start md:justify-start md:flex-col md:gap-2">
         <Button
           onClick={handleClearFilters}
           className="w-[120px] flex items-center gap-2 rounded-xl bg-red-300 hover:bg-red-200"

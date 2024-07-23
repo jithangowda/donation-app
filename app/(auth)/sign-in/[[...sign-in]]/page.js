@@ -83,7 +83,9 @@ export default function Page() {
             </div>
 
             {/* Sign-in form */}
-            <SignIn />
+            <section className="relative z-0">
+              <SignIn />
+            </section>
           </div>
         </main>
       </div>
