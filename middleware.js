@@ -8,13 +8,9 @@ export default clerkMiddleware((auth, req) => {
 });
 
 export const config = {
-  matcher: [
-    "/((?!.*\\..*|_next).*)",
-    "/",
-    "/(api|trpc)(.*)",
-    "/user(.*)",
-    "/((?!_next|api|static).*)",
-  ],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
 
 // publicRoutes: ["/"],
+// "/user(.*)",
+//     "/((?!_next|api|static).*)",

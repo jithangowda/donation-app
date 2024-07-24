@@ -31,7 +31,7 @@ function Header() {
     console.log(pathname); // Log current pathname on component mount
   }, []);
 
-  const [animationParent] = useAutoAnimate(); // Formkit auto-animate hook
+  const [animationParent] = useAutoAnimate({ duration: 200 }); // Formkit auto-animate hook
   const [isSideMenuOpen, setSideMenu] = useState(false); // State for side menu open/close
 
   function openSideMenu() {
@@ -139,7 +139,7 @@ function MobileNav({ closeSideMenu }) {
   // Render the mobile navigation menu
   return (
     <div className="fixed left-0 top-0 flex h-full min-h-screen w-full justify-end bg-black/60 md:hidden z-30">
-      <div className="h-full w-[65%] bg-white px-4 py-4">
+      <div className="h-full w-[70%] bg-white px-4 py-4">
         {/* Close button for mobile menu */}
         <section className="flex justify-end">
           <AiOutlineClose

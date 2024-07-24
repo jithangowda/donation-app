@@ -7,7 +7,8 @@ const mapContainerStyle = {
   width: "100%",
   height: "100%",
   borderRadius: "15px", // Rounded corners with unit
-  overflow: "hidden", // Ensure map respects border-radius
+  borderRadius: "0.75rem", // Rounded corners with Tailwind's rounded-xl equivalent
+  overflow: "hidden", // Ensures no overflow is visible
 };
 
 // Styling for the inner map container
