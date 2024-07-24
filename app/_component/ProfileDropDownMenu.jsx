@@ -103,7 +103,8 @@ function ProfileDropDownMenu({ user }) {
           {/* Close button positioned absolutely, moved down from the top */}
           <Button
             onClick={closeModal}
-            className="absolute top-8 right-4 px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-300 hover:text-black"
+            size="sm"
+            className="absolute top-8 right-4 px-4 py-2  bg-blue-500 text-white rounded-xl hover:bg-blue-300 hover:text-black"
           >
             Close
           </Button>

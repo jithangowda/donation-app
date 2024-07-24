@@ -32,6 +32,7 @@ function Listing({
   resetFilters, // Function to reset filters
   isSearchClicked, // Boolean indicating if search has been clicked
   setCoordinates, // Function to set coordinates
+  coordinates,
 }) {
   const [address, setAddress] = useState(); // State for address
 
@@ -80,7 +81,6 @@ function Listing({
   return (
     <div>
       {/* Search and filter section */}
-
       <div className="p-3 flex flex-col-2 md:flex-row md:gap-3 gap-2 items-center">
         {/* Google address search component */}
         <div className="flex-grow md:w-[calc(100%-120px)]">
@@ -94,7 +94,7 @@ function Listing({
           />
         </div>
         {/* Button to trigger search */}
-        <div className="flex-shrink-0 md:w-[118px] hidden md:block">
+        <div className="flex-shrink-0 md:w-[118px] ">
           <Button
             onClick={handleSearchClick}
             className="flex items-center gap-2 rounded-xl w-full"
@@ -113,6 +113,8 @@ function Listing({
         setFilterDate={setFilterDate}
         resetFilters={resetFilters}
         handleSearchClick={handleSearchClick}
+        coordinates={coordinates}
+        listing={listing}
       />
 
       {/* Display search result */}

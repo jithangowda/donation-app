@@ -17,7 +17,7 @@ const innerMapContainerStyle = {
   height: "100%",
 };
 
-function GoogleMaps({ coordinates, listing }) {
+function GoogleMapsSection({ coordinates, listing, zoom = 13 }) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY,
   });
@@ -50,7 +50,7 @@ function GoogleMaps({ coordinates, listing }) {
       <div style={innerMapContainerStyle}>
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "100%" }}
-          zoom={13}
+          zoom={zoom}
           center={center}
         >
           {listing.map((item, index) => (
@@ -62,4 +62,4 @@ function GoogleMaps({ coordinates, listing }) {
   );
 }
 
-export default GoogleMaps;
+export default GoogleMapsSection;

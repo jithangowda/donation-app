@@ -148,153 +148,166 @@ function UserListingsProfileModalSection({ onClose }) {
     <div>
       <h2 className="font-semibold text-md mb-2">Manage your Listings</h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {listing &&
-          listing.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-1.5"
-            >
-              <div className="relative">
-                <Image
-                  src={
-                    item?.listingImages[0]
-                      ? item?.listingImages[0]?.url
-                      : "/placeholder.svg"
-                  }
-                  width={400}
-                  height={150}
-                  alt="listing images"
-                  className="rounded-xl object-cover h-[170px]"
-                />
-                <h2
-                  className={`absolute top-0 left-0 text-white text-md rounded-br-xl rounded-tl-xl m-0 p-1 ${
-                    item.active
-                      ? "bg-green-500" // For Published
-                      : "bg-red-500" // For Draft
-                  }`}
-                >
-                  {item.active ? "Published" : "Draft"}
-                </h2>
-              </div>
-
-              <div className="flex flex-col m-2 gap-2 flex-grow">
-                <div className="flex justify-between gap-2">
-                  <div
-                    className={`rounded-xl p-2 flex items-center justify-center ${
-                      item.donationType === "Donation Offer"
-                        ? "bg-[#A0D6E8]"
-                        : "bg-[#FBCEB1]"
+        {listing?.length > 0
+          ? listing.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col h-full hover:border-3 hover:border-primary border-2 cursor-pointer rounded-xl p-1.5"
+              >
+                <div className="relative">
+                  <Image
+                    src={
+                      item?.listingImages[0]
+                        ? item?.listingImages[0]?.url
+                        : "/placeholder.svg"
+                    }
+                    width={400}
+                    height={150}
+                    alt="listing images"
+                    className="rounded-xl object-cover h-[170px]"
+                  />
+                  <h2
+                    className={`absolute top-0 left-0 text-white text-md rounded-br-xl rounded-tl-xl m-0 p-1 ${
+                      item.active
+                        ? "bg-green-500" // For Published
+                        : "bg-red-500" // For Draft
                     }`}
-                    style={item.active ? {} : getSkeletonStyle()}
                   >
-                    {item.active ? (
-                      <h2 className="font-semibold text-sm">
-                        {item.donationType}
-                      </h2>
-                    ) : (
-                      <div className="w-full h-full bg-gray-300 rounded"></div>
-                    )}
-                  </div>
-                  <div>
-                    <OpenGoogleMapsPage address={item.address} />
-                  </div>
-                </div>
-
-                <h2 className="flex gap-2 text-sm text-gray-400">
-                  <MapPin className="h-4 w-4 flex-shrink-0" />
-                  <span className="flex-grow">{item.address}</span>
-                </h2>
-
-                <h2 className="flex gap-2 text-sm text-gray-400">
-                  <RectangleEllipsis
-                    size={20}
-                    strokeWidth={2}
-                    className="h-4 w-4 flex-shrink-0"
-                  />
-                  <span className="flex-grow">
-                    {item.active ? item.driveName : "--"}
-                  </span>
-                </h2>
-
-                <h2 className="flex gap-2 text-sm text-gray-400">
-                  <CalendarDays
-                    size={20}
-                    strokeWidth={2}
-                    className="h-4 w-4 flex-shrink-0"
-                  />
-                  <span className="flex-grow">
-                    {item.active
-                      ? `${formatDate(item.startDate)} to ${formatDate(
-                          item.endDate
-                        )}`
-                      : "-- to --"}
-                  </span>
-                </h2>
-
-                <div className="mt-auto grid gap-2">
-                  <h2
-                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
-                    style={item.active ? {} : getSkeletonStyle(true)}
-                  >
-                    {item.active ? (
-                      <>
-                        {getOrganizerIcon(item.organizerType)}
-                        <span>{item.organizerType}</span>
-                      </>
-                    ) : (
-                      <div className="w-full h-full bg-gray-300 rounded"></div>
-                    )}
-                  </h2>
-
-                  <h2
-                    className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
-                    style={item.active ? {} : getSkeletonStyle(true)}
-                  >
-                    {item.active ? (
-                      <>
-                        {getNeedsIcon(item.donationNeeds)}
-                        <span>{item.donationNeeds}</span>
-                      </>
-                    ) : (
-                      <div className="w-full h-full bg-gray-300 rounded"></div>
-                    )}
+                    {item.active ? "Published" : "Draft"}
                   </h2>
                 </div>
 
-                <div className="flex flex-row gap-2">
-                  <div className="flex flex-grow gap-2">
-                    <Link href={"/view-listing/" + item.id} className="flex-1">
-                      <Button
-                        size="sm"
-                        className="w-full rounded-xl border-gray-400 hover:bg-gray-100"
-                        variant="outline"
-                        onClick={onClose} // Close the modal
-                      >
-                        View
-                      </Button>
-                    </Link>
-
-                    <Link href={"/edit-listing/" + item.id} className="flex-1">
-                      <Button
-                        size="sm"
-                        className="w-full rounded-xl bg-blue-500 text-white hover:bg-blue-300 hover:text-black"
-                        onClick={onClose} // Close the modal
-                      >
-                        Edit
-                      </Button>
-                    </Link>
+                <div className="flex flex-col m-2 gap-2 flex-grow">
+                  <div className="flex justify-between gap-2">
+                    <div
+                      className={`rounded-xl p-2 flex items-center justify-center ${
+                        item.donationType === "Donation Offer"
+                          ? "bg-[#A0D6E8]"
+                          : "bg-[#FBCEB1]"
+                      }`}
+                      style={item.active ? {} : getSkeletonStyle()}
+                    >
+                      {item.active ? (
+                        <h2 className="font-semibold text-sm">
+                          {item.donationType}
+                        </h2>
+                      ) : (
+                        <div className="w-full h-full bg-gray-300 rounded"></div>
+                      )}
+                    </div>
+                    <div>
+                      <OpenGoogleMapsPage address={item.address} />
+                    </div>
                   </div>
-                  <Button
-                    size="sm"
-                    className="rounded-xl ml-auto bg-red-500 text-white hover:bg-red-400"
-                    onClick={() => openDeleteDialog(item.id)}
-                  >
-                    <FaRegTrashCan className="text-xl" />
-                  </Button>
+
+                  <h2 className="flex gap-2 text-sm text-gray-400">
+                    <MapPin className="h-4 w-4 flex-shrink-0" />
+                    <span className="flex-grow">{item.address}</span>
+                  </h2>
+
+                  <h2 className="flex gap-2 text-sm text-gray-400">
+                    <RectangleEllipsis
+                      size={20}
+                      strokeWidth={2}
+                      className="h-4 w-4 flex-shrink-0"
+                    />
+                    <span className="flex-grow">
+                      {item.active ? item.driveName : "--"}
+                    </span>
+                  </h2>
+
+                  <h2 className="flex gap-2 text-sm text-gray-400">
+                    <CalendarDays
+                      size={20}
+                      strokeWidth={2}
+                      className="h-4 w-4 flex-shrink-0"
+                    />
+                    <span className="flex-grow">
+                      {item.active
+                        ? `${formatDate(item.startDate)} to ${formatDate(
+                            item.endDate
+                          )}`
+                        : "-- to --"}
+                    </span>
+                  </h2>
+
+                  <div className="mt-auto grid gap-2">
+                    <h2
+                      className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
+                      style={item.active ? {} : getSkeletonStyle(true)}
+                    >
+                      {item.active ? (
+                        <>
+                          {getOrganizerIcon(item.organizerType)}
+                          <span>{item.organizerType}</span>
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-gray-300 rounded"></div>
+                      )}
+                    </h2>
+
+                    <h2
+                      className="flex w-full gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700 items-center justify-center whitespace-nowrap"
+                      style={item.active ? {} : getSkeletonStyle(true)}
+                    >
+                      {item.active ? (
+                        <>
+                          {getNeedsIcon(item.donationNeeds)}
+                          <span>{item.donationNeeds}</span>
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-gray-300 rounded"></div>
+                      )}
+                    </h2>
+                  </div>
+
+                  <div className="flex flex-row gap-2">
+                    <div className="flex flex-grow gap-2">
+                      <Link
+                        href={"/view-listing/" + item.id}
+                        className="flex-1"
+                      >
+                        <Button
+                          size="sm"
+                          className="w-full rounded-xl border-gray-400 hover:bg-gray-100"
+                          variant="outline"
+                          onClick={onClose} // Close the modal
+                        >
+                          View
+                        </Button>
+                      </Link>
+
+                      <Link
+                        href={"/edit-listing/" + item.id}
+                        className="flex-1"
+                      >
+                        <Button
+                          size="sm"
+                          className="w-full rounded-xl bg-blue-500 text-white hover:bg-blue-300 hover:text-black"
+                          onClick={onClose} // Close the modal
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                    </div>
+                    <Button
+                      size="sm"
+                      className="rounded-xl ml-auto bg-red-500 text-white hover:bg-red-400"
+                      onClick={() => openDeleteDialog(item.id)}
+                    >
+                      <FaRegTrashCan className="text-xl" />
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          : // Placeholder elements for loading animation
+            [1, 2, 3, 4, 5, 6].map((item, index) => (
+              <div
+                key={index}
+                className="h-[230px] w-full bg-slate-200 animate-pulse rounded-xl"
+              ></div>
+            ))}
       </div>
       {/* Confirmation Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

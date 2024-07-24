@@ -159,11 +159,6 @@ function ListingMapView() {
   // Render the listing map view component
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
-      {/* Map section mobile view
-      <div className="md:hidden block">
-        <GoogleMapsSection listing={listing} coordinates={coordinates} />
-      </div> */}
-
       {/* Listing section */}
       <div>
         <Listing
@@ -177,6 +172,7 @@ function ListingMapView() {
           resetFilters={resetFilters}
           isSearchClicked={isSearchClicked}
           setCoordinates={setCoordinates}
+          coordinates={coordinates}
         />
       </div>
 

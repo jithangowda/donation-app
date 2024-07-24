@@ -157,4 +157,26 @@
 
 
 
+@keyframes pulse-color {
+  0% {
+    background-color: #41b2f0; /* Google Light Blue */
+  }
+  50% {
+    background-color: #93cdec; /* Smooth transition color */
+  }
+  100% {
+    background-color: #41b2f0; /* Return to Google Dark Blue */
+  }
+}
+
+.pulse-color-button {
+  animation: pulse-color 1.5s infinite; /* Adjust duration as needed */
+  transition: background-color 0.3s ease-in-out; /* Smooth transition */
+}
+
+.plus-sign {
+  font-size: 1.5rem; /* Adjust size as needed */
+  margin-right: 0.5rem; /* Space between plus sign and text */
+}
+
 
