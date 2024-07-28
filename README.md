@@ -72,9 +72,17 @@ Ensure you have the following installed:
    | address | varchar | - | No | Is Nullable, Is Unique |
    | coordinates | json | - | No | Is Nullable |
    | created_by | varchar | - | No | - |
-   | coordinates | json | - | No | Is Nullable |
-   | coordinates | json | - | No | Is Nullable |
-   | coordinates | json | - | No | Is Nullable |
+   | active | bool | false | No | Is Nullable |
+   | description | varchar | - | No | Is Nullable |
+   | donationNeeds | varchar | - | No | Is Nullable |
+   | donationType | varchar | - | No | Is Nullable |
+   | driveName | varchar | - | No | Is Nullable |
+   | organizerType | varchar | - | No | Is Nullable |
+   | profileImage | varchar | - | No | Is Nullable |
+   | userName | varchar | - | No | Is Nullable |
+   | enddate | date | - | No | Is Nullable |
+   | startDate | date | - | No | Is Nullable |
+   
    
 ### Running the Application
 
