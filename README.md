@@ -53,19 +53,55 @@ Ensure you have the following installed:
    # Get URL and keys from supabase.com
    NEXT_PUBLIC_SUPABASE_URL=yourURL
    NEXT_PUBLIC_SUPABASE_API_KEY=yourKey
+
+   # Get Google Maps keys
+   NEXT_PUBLIC_GOOGLE_PLACE_API_KEY=yourKey
+
+   # Paste URL from supabase bucket named listingImages
+   NEXT_PUBLIC_IMAGE_URL=yourURL
    ```
 
-#get key from google maps API
-NEXT_PUBLIC_GOOGLE_PLACE_API_KEY=yourKey
+### Supabase Schema
 
-```
+1. **Table: listing**
+   _✅ Enable Row Level Security (RLS)_
 
-Run dev
+   | Name          | Type        | Default Value | Primary | Extra Option           |
+   | ------------- | ----------- | ------------- | ------- | ---------------------- |
+   | id            | int8        | ❌            | ✅      | Is Identity            |
+   | created_at    | timestamptz | now()         | ❌      | ❌                     |
+   | address       | varchar     | ❌            | ❌      | Is Nullable, Is Unique |
+   | coordinates   | json        | ❌            | ❌      | Is Nullable            |
+   | created_by    | varchar     | ❌            | ❌      | ❌                     |
+   | active        | bool        | false         | ❌      | Is Nullable            |
+   | description   | varchar     | ❌            | ❌      | Is Nullable            |
+   | donationNeeds | varchar     | ❌            | ❌      | Is Nullable            |
+   | donationType  | varchar     | ❌            | ❌      | Is Nullable            |
+   | driveName     | varchar     | ❌            | ❌      | Is Nullable            |
+   | organizerType | varchar     | ❌            | ❌      | Is Nullable            |
+   | profileImage  | varchar     | ❌            | ❌      | Is Nullable            |
+   | userName      | varchar     | ❌            | ❌      | Is Nullable            |
+   | enddate       | date        | ❌            | ❌      | Is Nullable            |
+   | startDate     | date        | ❌            | ❌      | Is Nullable            |
 
-```
+2. **Table: listingImages**
+   _✅ Enable Row Level Security (RLS)_
 
+   | Name       | Type        | Default Value | Primary | Extra Option |
+   | ---------- | ----------- | ------------- | ------- | ------------ |
+   | id         | int8        | ❌            | ✅      | Is Identity  |
+   | created_at | timestamptz | now()         | ❌      | ❌           |
+   | url        | varchar     | ❌            | ❌      | Is Nullable  |
+   | listing_id | int8        | ❌            | ❌      | Is Nullable  |
+
+3. **Create Buctket: listingImages**
+
+### Running the Application
+
+To start the development server, run:
+
+```bash
 npm run dev
-
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -83,4 +119,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [Clerk](https://clerk.com) for authentication services.
 - [Supabase](https://supabase.com) for backend services.
-```
