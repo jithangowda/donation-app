@@ -72,7 +72,7 @@ function FilterSection({
           <PopoverTrigger className="bg-blue-200 rounded-xl w-[340px]">
             Show Filters
           </PopoverTrigger>
-          <PopoverContent className="rounded-xl w-[360px] bg-white transform translate-x-2">
+          <PopoverContent className="rounded-xl w-[355px] bg-white transform translate-x-2">
             <div className="grid grid-cols-2 gap-2">
               {/* Donation type filter */}
               <Select onValueChange={setFilterDonationType}>
