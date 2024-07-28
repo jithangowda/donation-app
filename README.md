@@ -76,13 +76,13 @@ Ensure you have the following installed:
    | active        | bool        | false         | ❌      | Is Nullable            |
    | description   | varchar     | ❌            | ❌      | Is Nullable            |
    | donationNeeds | varchar     | ❌            | ❌      | Is Nullable            |
-   | donationType  | varchar     | ❌            | No      | Is Nullable            |
-   | driveName     | varchar     | ❌            | No      | Is Nullable            |
-   | organizerType | varchar     | ❌            | No      | Is Nullable            |
-   | profileImage  | varchar     | ❌            | No      | Is Nullable            |
-   | userName      | varchar     | ❌            | No      | Is Nullable            |
-   | enddate       | date        | ❌            | No      | Is Nullable            |
-   | startDate     | date        | ❌            | No      | Is Nullable            |
+   | donationType  | varchar     | ❌            | ❌      | Is Nullable            |
+   | driveName     | varchar     | ❌            | ❌      | Is Nullable            |
+   | organizerType | varchar     | ❌            | ❌      | Is Nullable            |
+   | profileImage  | varchar     | ❌            | ❌      | Is Nullable            |
+   | userName      | varchar     | ❌            | ❌      | Is Nullable            |
+   | enddate       | date        | ❌            | ❌      | Is Nullable            |
+   | startDate     | date        | ❌            | ❌      | Is Nullable            |
 
 2. **Table: listingImages**
    _✅ Enable Row Level Security (RLS)_
@@ -91,6 +91,8 @@ Ensure you have the following installed:
    | ------------- | ----------- | ------------- | ------- | ---------------------- |
    | id            | int8        | ❌            | ✅      | Is Identity            |
    | created_at    | timestamptz | now()         | ❌      | ❌                     |
+   | url | varchar     | ❌            | ❌      | Is Nullable            |
+   | listing_id | int8 | ❌ | ❌ | Is Nullable |
 
 ### Running the Application
 
