@@ -72,16 +72,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - **Data Management**: Utilizes Supabase for backend data storage and management.
 - **Responsive Design**: Ensures a seamless experience across different device sizes.
 
-### Contributing
-
-If you would like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
-
 ### License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -91,6 +81,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Clerk](https://clerk.com) for authentication services.
 - [Supabase](https://supabase.com) for backend services.
 
----
-
-Feel free to customize this README further to fit your project's specific needs.
