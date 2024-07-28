@@ -17,7 +17,7 @@ const innerMapContainerStyle = {
   height: "100%",
 };
 
-function GoogleMapsSection({ coordinates, listing, zoom = 13 }) {
+function GoogleMapsSection({ coordinates, listing, zoom = 12 }) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY,
   });
