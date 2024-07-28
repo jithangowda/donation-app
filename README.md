@@ -64,26 +64,26 @@ Ensure you have the following installed:
 ### Supabase DB Schema
 
 1. **Table: listing**
-   
-   | Name | Type | Default Value | Primary | Extra Option |
-   |---|---|---|---|---|
-   | id          | int8        |       -       | Yes | Is Identity |
-   | created_at  | timestamptz | now() | No | - |
-   | address | varchar | - | No | Is Nullable, Is Unique |
-   | coordinates | json | - | No | Is Nullable |
-   | created_by | varchar | - | No | - |
-   | active | bool | false | No | Is Nullable |
-   | description | varchar | - | No | Is Nullable |
-   | donationNeeds | varchar | - | No | Is Nullable |
-   | donationType | varchar | - | No | Is Nullable |
-   | driveName | varchar | - | No | Is Nullable |
-   | organizerType | varchar | - | No | Is Nullable |
-   | profileImage | varchar | - | No | Is Nullable |
-   | userName | varchar | - | No | Is Nullable |
-   | enddate | date | - | No | Is Nullable |
-   | startDate | date | - | No | Is Nullable |
-   
-   
+    ✅ Enable Row Level Security (RLS)
+
+   | Name          | Type        | Default Value | Primary | Extra Option           |
+   | ------------- | ----------- | ------------- | ------- | ---------------------- |
+   | id            | int8        | -             | Yes     | Is Identity            |
+   | created_at    | timestamptz | now()         | No      | -                      |
+   | address       | varchar     | -             | No      | Is Nullable, Is Unique |
+   | coordinates   | json        | -             | No      | Is Nullable            |
+   | created_by    | varchar     | -             | No      | -                      |
+   | active        | bool        | false         | No      | Is Nullable            |
+   | description   | varchar     | -             | No      | Is Nullable            |
+   | donationNeeds | varchar     | -             | No      | Is Nullable            |
+   | donationType  | varchar     | -             | No      | Is Nullable            |
+   | driveName     | varchar     | -             | No      | Is Nullable            |
+   | organizerType | varchar     | -             | No      | Is Nullable            |
+   | profileImage  | varchar     | -             | No      | Is Nullable            |
+   | userName      | varchar     | -             | No      | Is Nullable            |
+   | enddate       | date        | -             | No      | Is Nullable            |
+   | startDate     | date        | -             | No      | Is Nullable            |
+
 ### Running the Application
 
 To start the development server, run:
