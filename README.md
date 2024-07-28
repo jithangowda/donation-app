@@ -1,4 +1,4 @@
-# Donation App
+# Donatory
 
 This is a mini project for the 6th semester.
 
