@@ -64,24 +64,18 @@ Ensure you have the following installed:
 ### Supabase DB Schema
 
 1. **Table: listing**
-   ```
-   | Name        | Type        | Default Value | Primary | Extra Option |
-   |-------------|-------------|---------------|---------|--------------|
-   | id          | int8        |       -       | Yes     | Is Identity  |
-   | created_at  | timestamptz |       -       | Yes     | Is Identity  |
-   | id          | int8     |       -       | Yes     | Is Identity  |
-   | id          | int8     |       -       | Yes     | Is Identity  |
-   | id          | int8     |       -       | Yes     | Is Identity  |
-   | id          | int8     |       -       | Yes     | Is Identity  |
-   | id          | int8     |       -       | Yes     | Is Identity  |
    
-   ```
-
    | Name | Type | Default Value | Primary | Extra Option |
    |---|---|---|---|---|
-   | created_at  | timestamptz | - | Yes | Is Identity |
+   | id          | int8        |       -       | Yes | Is Identity |
+   | created_at  | timestamptz | now() | No | - |
+   | address | varchar | - | No | Is Nullable, Is Unique |
+   | coordinates | json | - | No | Is Nullable |
+   | created_by | varchar | - | No | - |
+   | coordinates | json | - | No | Is Nullable |
+   | coordinates | json | - | No | Is Nullable |
+   | coordinates | json | - | No | Is Nullable |
    
-
 ### Running the Application
 
 To start the development server, run:
