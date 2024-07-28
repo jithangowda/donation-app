@@ -65,17 +65,16 @@ Ensure you have the following installed:
 
 1. **Table: listing**
    ```
-   | Name        | Type     | Default Value | Primary | Extra Option |
-   |-------------|----------|---------------|---------|--------------|
-   | id          | int8     |       -       | Yes
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
-   | id          | int8     |
+   | Name | Type | Default Value | Primary | Extra Option |
+   |---|---|---|---|---|
+   | id | int8 | - | Yes | Is Identity |
+   | created_at  | int8     |       -       | Yes     | Is Identity  |
+   | id          | int8     |       -       | Yes     | Is Identity  |
+   | id          | int8     |       -       | Yes     | Is Identity  |
+   | id          | int8     |       -       | Yes     | Is Identity  |
+   | id          | int8     |       -       | Yes     | Is Identity  |
+   | id          | int8     |       -       | Yes     | Is Identity  |
+   
    ```
 
 ### Running the Application
