@@ -68,21 +68,21 @@ Ensure you have the following installed:
 
    | Name          | Type        | Default Value | Primary | Extra Option           |
    | ------------- | ----------- | ------------- | ------- | ---------------------- |
-   | id            | int8        | -             | Yes     | Is Identity            |
-   | created_at    | timestamptz | now()         | No      | -                      |
-   | address       | varchar     | -             | No      | Is Nullable, Is Unique |
-   | coordinates   | json        | -             | No      | Is Nullable            |
-   | created_by    | varchar     | -             | No      | -                      |
-   | active        | bool        | false         | No      | Is Nullable            |
-   | description   | varchar     | -             | No      | Is Nullable            |
-   | donationNeeds | varchar     | -             | No      | Is Nullable            |
-   | donationType  | varchar     | -             | No      | Is Nullable            |
-   | driveName     | varchar     | -             | No      | Is Nullable            |
-   | organizerType | varchar     | -             | No      | Is Nullable            |
-   | profileImage  | varchar     | -             | No      | Is Nullable            |
-   | userName      | varchar     | -             | No      | Is Nullable            |
-   | enddate       | date        | -             | No      | Is Nullable            |
-   | startDate     | date        | -             | No      | Is Nullable            |
+   | id            | int8        | ❌             | ✅    | Is Identity            |
+   | created_at    | timestamptz | now()         | ❌      | ❌                      |
+   | address       | varchar     | ❌             | ❌      | Is Nullable, Is Unique |
+   | coordinates   | json        | ❌             | ❌      | Is Nullable            |
+   | created_by    | varchar     | ❌             | ❌      | ❌                      |
+   | active        | bool        | false         | ❌      | Is Nullable            |
+   | description   | varchar     | ❌             | ❌      | Is Nullable            |
+   | donationNeeds | varchar     | ❌             | ❌      | Is Nullable            |
+   | donationType  | varchar     | ❌             | No      | Is Nullable            |
+   | driveName     | varchar     | ❌             | No      | Is Nullable            |
+   | organizerType | varchar     | ❌             | No      | Is Nullable            |
+   | profileImage  | varchar     | ❌             | No      | Is Nullable            |
+   | userName      | varchar     | ❌             | No      | Is Nullable            |
+   | enddate       | date        | ❌             | No      | Is Nullable            |
+   | startDate     | date        | ❌             | No      | Is Nullable            |
 
 ### Running the Application
 
