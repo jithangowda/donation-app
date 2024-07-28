@@ -61,7 +61,7 @@ Ensure you have the following installed:
    NEXT_PUBLIC_IMAGE_URL=yourURL
    ```
 
-### Supabase DB Schema
+### Supabase Schema
 
 1. **Table: listing**
    _✅ Enable Row Level Security (RLS)_
@@ -93,6 +93,8 @@ Ensure you have the following installed:
    | created_at    | timestamptz | now()         | ❌      | ❌                     |
    | url | varchar     | ❌            | ❌      | Is Nullable            |
    | listing_id | int8 | ❌ | ❌ | Is Nullable |
+
+3. **Create Buctket: listingImages**
 
 ### Running the Application
 
