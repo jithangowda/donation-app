@@ -64,25 +64,33 @@ Ensure you have the following installed:
 ### Supabase DB Schema
 
 1. **Table: listing**
-*✅ Enable Row Level Security (RLS)*
+   _✅ Enable Row Level Security (RLS)_
 
    | Name          | Type        | Default Value | Primary | Extra Option           |
    | ------------- | ----------- | ------------- | ------- | ---------------------- |
-   | id            | int8        | ❌             | ✅    | Is Identity            |
-   | created_at    | timestamptz | now()         | ❌      | ❌                      |
-   | address       | varchar     | ❌             | ❌      | Is Nullable, Is Unique |
-   | coordinates   | json        | ❌             | ❌      | Is Nullable            |
-   | created_by    | varchar     | ❌             | ❌      | ❌                      |
+   | id            | int8        | ❌            | ✅      | Is Identity            |
+   | created_at    | timestamptz | now()         | ❌      | ❌                     |
+   | address       | varchar     | ❌            | ❌      | Is Nullable, Is Unique |
+   | coordinates   | json        | ❌            | ❌      | Is Nullable            |
+   | created_by    | varchar     | ❌            | ❌      | ❌                     |
    | active        | bool        | false         | ❌      | Is Nullable            |
-   | description   | varchar     | ❌             | ❌      | Is Nullable            |
-   | donationNeeds | varchar     | ❌             | ❌      | Is Nullable            |
-   | donationType  | varchar     | ❌             | No      | Is Nullable            |
-   | driveName     | varchar     | ❌             | No      | Is Nullable            |
-   | organizerType | varchar     | ❌             | No      | Is Nullable            |
-   | profileImage  | varchar     | ❌             | No      | Is Nullable            |
-   | userName      | varchar     | ❌             | No      | Is Nullable            |
-   | enddate       | date        | ❌             | No      | Is Nullable            |
-   | startDate     | date        | ❌             | No      | Is Nullable            |
+   | description   | varchar     | ❌            | ❌      | Is Nullable            |
+   | donationNeeds | varchar     | ❌            | ❌      | Is Nullable            |
+   | donationType  | varchar     | ❌            | No      | Is Nullable            |
+   | driveName     | varchar     | ❌            | No      | Is Nullable            |
+   | organizerType | varchar     | ❌            | No      | Is Nullable            |
+   | profileImage  | varchar     | ❌            | No      | Is Nullable            |
+   | userName      | varchar     | ❌            | No      | Is Nullable            |
+   | enddate       | date        | ❌            | No      | Is Nullable            |
+   | startDate     | date        | ❌            | No      | Is Nullable            |
+
+2. **Table: listingImages**
+   _✅ Enable Row Level Security (RLS)_
+
+   | Name          | Type        | Default Value | Primary | Extra Option           |
+   | ------------- | ----------- | ------------- | ------- | ---------------------- |
+   | id            | int8        | ❌            | ✅      | Is Identity            |
+   | created_at    | timestamptz | now()         | ❌      | ❌                     |
 
 ### Running the Application
 
