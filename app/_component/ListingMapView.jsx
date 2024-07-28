@@ -177,7 +177,7 @@ function ListingMapView() {
       </div>
 
       {/* Map section pc view*/}
-      <div className="md:fixed md:right-10 md:w-[46%] ">
+      <div className="md:fixed md:right-10 md:w-[46%] hidden md:block">
         <GoogleMapsSection listing={listing} coordinates={coordinates} />
       </div>
     </div>

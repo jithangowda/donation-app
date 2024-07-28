@@ -52,6 +52,7 @@ function GoogleMapsSection({ coordinates, listing, zoom = 13 }) {
           mapContainerStyle={{ width: "100%", height: "100%" }}
           zoom={zoom}
           center={center}
+          gestureHandling="greedy"
         >
           {listing.map((item, index) => (
             <MapMarkerItems key={index} item={item} />

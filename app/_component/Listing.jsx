@@ -20,6 +20,15 @@ import { Button } from "@/components/ui/button.jsx"; // Button component
 import FilterSection from "./FilterSection.jsx"; // Filter section component
 import OpenGoogleMapsPage from "./OpenGoogleMapsPage.jsx";
 import Link from "next/link.js";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import GoogleMapCard from "./GoogleMapCard.jsx";
 
 function Listing({
   listing, // List of listings to display
@@ -116,6 +125,15 @@ function Listing({
         coordinates={coordinates}
         listing={listing}
       />
+
+      {/* google map card for mobile view */}
+      <div className="block md:hidden my-3">
+        <Card className="rounded-xl">
+          <CardContent className="p-1">
+            <GoogleMapCard listing={listing} coordinates={coordinates} />
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Display search result */}
       {isSearchClicked && address && (
