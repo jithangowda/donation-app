@@ -57,22 +57,6 @@ const getNeedsIcon = (donationNeeds) => {
 };
 
 function Details({ listingDetail }) {
-  const handleShare = () => {
-    // Logic to handle sharing the listing
-    if (navigator.share) {
-      navigator
-        .share({
-          title: listingDetail.driveName,
-          text: `Check out this listing: ${listingDetail.address}`,
-          url: window.location.href,
-        })
-        .catch(console.error);
-    } else {
-      // Fallback for browsers that do not support the Web Share API
-      alert("Sharing is not supported on this browser.");
-    }
-  };
-
   if (!listingDetail) {
     return <div>Loading...</div>; // Display a loading message while the details are being fetched
   }
@@ -94,26 +78,13 @@ function Details({ listingDetail }) {
                   : "bg-[#FBCEB1]"
               }`}
             >
-              <h2 className="font-semibold text-xl">
+              <h2 className="font-semibold text-lg md:text-xl">
                 {listingDetail.donationType}
               </h2>
             </div>
-            <div className="flex items-center gap-2">
-              <Button
-                onClick={handleShare}
-                className="flex items-center justify-center w-20 h-10 rounded-xl bg-[#A0D6E8] hover:bg-[#caeaf6]"
-                variant="link"
-                size="sm"
-              >
-                <Share
-                  className="text-gray-600"
-                  style={{ width: "20px", height: "20px" }}
-                />
-              </Button>
-            </div>
           </div>
           {/* Display address */}
-          <div className="flex items-center gap-2 text-xl text-gray-600">
+          <div className="flex items-center gap-2 text-lg md:text-xl text-gray-600">
             <MapPin
               className="flex-shrink-0"
               style={{ width: "26px", height: "26px" }}
@@ -122,8 +93,8 @@ function Details({ listingDetail }) {
             <span>{listingDetail.address}</span>
           </div>
           {/* Display date range and organizer type & donation needs */}
-          <div className="flex justify-between items-center mt-1">
-            <h2 className="flex items-center gap-2 text-xl text-gray-600">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-1">
+            <div className="flex items-center gap-2 text-lg md:text-xl text-gray-600">
               <CalendarDays
                 style={{ width: "26px", height: "26px" }}
                 strokeWidth={2}
@@ -133,15 +104,15 @@ function Details({ listingDetail }) {
                 {formatDate(listingDetail.startDate)} to{" "}
                 {formatDate(listingDetail.endDate)}
               </span>
-            </h2>
-            <div className="flex gap-4">
+            </div>
+            <div className="flex flex-col md:flex-row gap-4 mt-2 md:mt-0 w-full md:w-auto">
               {/* Organizer type */}
-              <div className="flex items-center gap-2 text-md bg-[#E6E6FA] rounded-xl p-2 text-gray-700">
+              <div className="flex items-center justify-center gap-2 text-sm md:text-md bg-[#E6E6FA] rounded-xl p-2 text-gray-700 w-full md:w-auto">
                 {getOrganizerIcon(listingDetail.organizerType)}
                 <span>{listingDetail.organizerType}</span>
               </div>
               {/* Donation needs */}
-              <div className="flex items-center gap-2 text-sm bg-[#E6E6FA] rounded-xl p-2 text-gray-700">
+              <div className="flex items-center justify-center gap-2 text-sm md:text-md bg-[#E6E6FA] rounded-xl p-2 text-gray-700 w-full md:w-auto">
                 {getNeedsIcon(listingDetail.donationNeeds)}
                 <span>{listingDetail.donationNeeds}</span>
               </div>
@@ -152,23 +123,22 @@ function Details({ listingDetail }) {
           <div className="my-4">
             <PublisherDetail listingDetail={listingDetail} />
           </div>
-
           <hr className="my-2" />
 
           {/* Display drive name and description */}
-          <h2 className="flex gap-2 text-xl font-semibold mb-1">
+          <h2 className="flex gap-2 text-lg md:text-xl font-semibold mb-1">
             <span>{listingDetail.driveName}</span>
           </h2>
-          <h2 className="text-md font-light">
+          <h2 className="text-sm md:text-base font-light text-justify">
             <span>{listingDetail.description}</span>
           </h2>
           <hr className="my-2" />
 
           {/* Display map */}
-          <h2 className="flex gap-2 text-xl font-semibold mb-1">
+          <h2 className="flex gap-2 text-lg md:text-xl font-semibold mb-1">
             <span>Find On Map</span>
           </h2>
-          <div className="w-full h-[400px] rounded-xl overflow-hidden">
+          <div className="w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden">
             <iframe
               width="100%"
               height="100%"

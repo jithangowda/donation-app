@@ -64,13 +64,13 @@ function FilterSection({
   };
 
   return (
-    <div className="col-span-2 px-3 grid grid-cols-2 gap-2 md:flex md:gap-2 mb-2 md:mb-4">
+    <div className="col-span-2  grid grid-cols-2 gap-2 md:flex md:gap-2 mb-2 md:mb-4">
       {/* Clear and search button only visible on mobile */}
       <div className="flex md:hidden col-span-2 justify-center gap-2 ">
         {/* Button to open filters in mobile view */}
         <Popover>
           <PopoverTrigger className="bg-blue-200 rounded-xl w-[340px]">
-            Open Filters
+            Show Filters
           </PopoverTrigger>
           <PopoverContent className="rounded-xl w-[360px] bg-white transform translate-x-2">
             <div className="grid grid-cols-2 gap-2">
@@ -244,10 +244,10 @@ function FilterSection({
         </div>
       </div>
 
-      {/* Donation type filter */}
+      {/* Donation type filter w-[140px]*/}
       <div className="hidden md:block">
         <Select onValueChange={setFilterDonationType}>
-          <SelectTrigger className="md:w-[130px] w-full rounded-xl border-gray-300">
+          <SelectTrigger className="md:w-[140px] w-full rounded-xl border-gray-300">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -275,10 +275,10 @@ function FilterSection({
         </Select>
       </div>
 
-      {/* Organizer type filter */}
+      {/* Organizer type filter w-[190px]*/}
       <div className="hidden md:block">
         <Select onValueChange={setFilterOrganizerType}>
-          <SelectTrigger className="md:w-[177px]  w-full rounded-xl border-gray-300">
+          <SelectTrigger className="md:w-[190px]  w-full rounded-xl border-gray-300">
             <SelectValue placeholder="Organizer" />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -316,10 +316,10 @@ function FilterSection({
         </Select>
       </div>
 
-      {/* Donation needs filter */}
+      {/* Donation needs filter w-[180px]*/}
       <div className="hidden md:block">
         <Select onValueChange={setFilterDonationNeeds}>
-          <SelectTrigger className="md:w-[180px] w-full rounded-xl border-gray-300">
+          <SelectTrigger className="md:w-[180px]  w-full rounded-xl border-gray-300">
             <SelectValue placeholder="Needs" />
           </SelectTrigger>
           <SelectContent className="bg-white ">
@@ -377,14 +377,14 @@ function FilterSection({
         </Select>
       </div>
 
-      {/* Calendar popover for selecting a date */}
+      {/* Calendar popover for selecting a date w-[150px]*/}
       <div className="hidden md:block">
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
               className={cn(
-                "md:w-[150px]  w-full justify-start text-left font-normal rounded-xl border-gray-300",
+                "md:w-[150px] w-full justify-start text-left font-normal rounded-xl border-gray-300",
                 !date && "text-muted-foreground"
               )}
             >

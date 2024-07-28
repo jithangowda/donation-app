@@ -4,6 +4,14 @@ import Listing from "./Listing.jsx"; // Listing component
 import { supabase } from "@/utils/supabase/client.js"; // Supabase client instance
 import { format } from "date-fns"; // Date formatting function
 import GoogleMapsSection from "./GoogleMapsSection.jsx"; // Google Maps section component
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 function ListingMapView() {
   // State variables to hold listings, filters, and other UI-related states
@@ -160,7 +168,7 @@ function ListingMapView() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {/* Listing section */}
-      <div>
+      <div className="md:col-span-1 overflow-auto">
         <Listing
           listing={listing}
           handleSearchClick={handleSearchClick}
@@ -177,8 +185,12 @@ function ListingMapView() {
       </div>
 
       {/* Map section pc view*/}
-      <div className="md:fixed md:right-10 md:w-[46%] hidden md:block">
-        <GoogleMapsSection listing={listing} coordinates={coordinates} />
+      <div className=" md:right-10 md:w-full hidden md:block md:ml-4 md:col-span-1">
+        <Card className="bg-white rounded-xl shadow-md">
+          <CardContent className="p-0">
+            <GoogleMapsSection listing={listing} coordinates={coordinates} />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

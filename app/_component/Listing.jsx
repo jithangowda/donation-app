@@ -90,7 +90,7 @@ function Listing({
   return (
     <div>
       {/* Search and filter section */}
-      <div className="p-3 flex flex-col-2 md:flex-row md:gap-3 gap-2 items-center">
+      <div className="pb-3 flex flex-col-2 md:flex-row md:gap-3 gap-2 items-center">
         {/* Google address search component */}
         <div className="flex-grow md:w-[calc(100%-120px)]">
           <GoogleAddressSearch
@@ -128,8 +128,8 @@ function Listing({
 
       {/* google map card for mobile view */}
       <div className="block md:hidden my-3">
-        <Card className="rounded-xl">
-          <CardContent className="p-1">
+        <Card className="rounded-xl shadow-md">
+          <CardContent className="p-0">
             <GoogleMapCard listing={listing} coordinates={coordinates} />
           </CardContent>
         </Card>

@@ -34,7 +34,7 @@ function ViewListing({ params }) {
     }
   };
   return (
-    <div className="p-4 px-32 my-4">
+    <div className="p-4 md:px-32 md:my-4">
       <Slider imageList={listingDetail?.listingImages} />
       <Details listingDetail={listingDetail} />
     </div>
