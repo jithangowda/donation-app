@@ -65,9 +65,9 @@ Ensure you have the following installed:
 
 1. **Table: listing**
    ```
-   | Name | Type | Default Value | Primary | Extra Option |
-   |---|---|---|---|---|
-   | id | int8 | - | Yes | Is Identity |
+   | Name        | Type     | Default Value | Primary | Extra Option |
+   |-------------|----------|---------------|---------|--------------|
+   | id          | int8     |       -       | Yes     | Is Identity  |
    | created_at  | int8     |       -       | Yes     | Is Identity  |
    | id          | int8     |       -       | Yes     | Is Identity  |
    | id          | int8     |       -       | Yes     | Is Identity  |
