@@ -61,6 +61,23 @@ Ensure you have the following installed:
    NEXT_PUBLIC_IMAGE_URL=yourURL
    ```
 
+### Supabase DB Schema
+
+1. **Table: listing**
+   ```
+   | Name        | Type     | Default Value | Primary | Extra Option |
+   |-------------|----------|---------------|---------|--------------|
+   | id          | int8     |       -       | Yes
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   | id          | int8     |
+   ```
+
 ### Running the Application
 
 To start the development server, run:
