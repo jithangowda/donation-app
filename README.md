@@ -43,7 +43,7 @@ Ensure you have the following installed:
 
    ```env
    # Get keys from clerk.com
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pyourKey
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=yourKey
    CLERK_SECRET_KEY=yourKey
 
    # This remains as it is
@@ -57,9 +57,8 @@ Ensure you have the following installed:
    # Get Google Maps keys
    NEXT_PUBLIC_GOOGLE_PLACE_API_KEY=yourKey
 
-   # Paste URL from supabase bucket
-
-   NEXT_PUBLIC_IMAGE_URL=https://dqocrhqzihhugcbohaob.supabase.co/storage/v1/object/public/listingImages/
+   # Paste URL from supabase bucket named listingImages
+   NEXT_PUBLIC_IMAGE_URL=yourURL
    ```
 
 ### Running the Application
