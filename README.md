@@ -64,9 +64,7 @@ Ensure you have the following installed:
 ### Supabase DB Schema
 
 1. **Table: listing**
-```
-✅ Enable Row Level Security (RLS)
-```
+*✅ Enable Row Level Security (RLS)*
 
    | Name          | Type        | Default Value | Primary | Extra Option           |
    | ------------- | ----------- | ------------- | ------- | ---------------------- |
