@@ -73,20 +73,32 @@ function Header() {
             </Link>
 
             <Link
-              href={"/"}
+              href={"/about-us"}
               className="relative group px-2 py-3 transition-all"
             >
               <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-                <span>About us</span>
+                <span
+                  className={`hover:text-primary font-medium text-sm cursor-pointer ${
+                    pathname == "/about-us" && "text-primary"
+                  }`}
+                >
+                  About us
+                </span>
               </p>
             </Link>
 
             <Link
-              href={"/"}
+              href={"/contact-us"}
               className="relative group px-2 py-3 transition-all"
             >
               <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-                <span>Contact us</span>
+                <span
+                  className={`hover:text-primary font-medium text-sm cursor-pointer ${
+                    pathname == "/contact-us" && "text-primary"
+                  }`}
+                >
+                  Contact us
+                </span>
               </p>
             </Link>
           </div>
@@ -171,12 +183,18 @@ function MobileNav({ closeSideMenu }) {
 
           {/* Link to about us */}
           <Link
-            href={"/"}
+            href={"/about-us"}
             onClick={closeSideMenu}
             className="relative group px-2 py-3 transition-all"
           >
             <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-              <span>About us</span>
+              <span
+                className={`hover:text-primary font-medium text-sm cursor-pointer ${
+                  pathname == "/about-us" && "text-primary"
+                }`}
+              >
+                About us
+              </span>
               {/* Arrow icon for dropdown */}
               {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
             </p>
@@ -184,12 +202,18 @@ function MobileNav({ closeSideMenu }) {
 
           {/* Link to contact us */}
           <Link
-            href={"/"}
+            href={"/contact-us"}
             onClick={closeSideMenu}
             className="relative group px-2 py-3 transition-all"
           >
             <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
-              <span>Contacts</span>
+              <span
+                className={`hover:text-primary font-medium text-sm cursor-pointer ${
+                  pathname == "/contact-us" && "text-primary"
+                }`}
+              >
+                Contacts
+              </span>
               {/* Arrow icon for dropdown */}
               {/* <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" /> */}
             </p>
